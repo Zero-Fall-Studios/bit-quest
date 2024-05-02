@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://do51d1tc4nsbh"]
 
-[ext_resource type="Script" path="res://scenes/character_controls/character.gd" id="1_cek5b"]
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_cek5b"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_imlqm"]
-[ext_resource type="Script" path="res://scenes/character_controls/npc_controls.gd" id="3_xe7i2"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_xe7i2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ydorh"]
 size = Vector2(16, 16)
@@ -20,4 +20,3 @@ shape = SubResource("RectangleShape2D_ydorh")
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("3_xe7i2")
-argo_distance = 100

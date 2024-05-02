@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b23ielbj1gg1s"]
 
-[ext_resource type="Script" path="res://scenes/character_controls/character.gd" id="1_a7n7n"]
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_a7n7n"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_ms1nf"]
-[ext_resource type="Script" path="res://scenes/character_controls/npc_controls.gd" id="3_h6upt"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_h6upt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlag5"]
 size = Vector2(14, 16)
