@@ -20,12 +20,20 @@ size = Vector2(345, 19)
 
 [node name="Player" parent="." instance=ExtResource("1_uxv67")]
 position = Vector2(105, 79)
-
-[node name="NPC" parent="." instance=ExtResource("2_cvo7m")]
-position = Vector2(235, 82)
+max_speed = 200.0
+friction = 5.0
 
 [node name="npc2" parent="." instance=ExtResource("3_72j5o")]
 position = Vector2(181, 124)
+max_speed = 300.0
+acceleration = 50.0
+friction = 70.0
+
+[node name="NPC" parent="." instance=ExtResource("2_cvo7m")]
+position = Vector2(256, 64)
+max_speed = 300.0
+acceleration = 10.0
+friction = 5.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

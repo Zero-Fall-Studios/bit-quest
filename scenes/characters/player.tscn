@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://q28w184q466y"]
+[gd_scene load_steps=9 format=3 uid="uid://q28w184q466y"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_28fcs"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_pb85r"]
 [ext_resource type="Script" path="res://scripts/character/controls/player_controls.gd" id="3_nfwgp"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_kvt3s"]
+[ext_resource type="Script" path="res://scripts/character/player/states/idle_state.gd" id="5_071iq"]
+[ext_resource type="Script" path="res://scripts/character/player/states/walk_state.gd" id="6_whvp4"]
+[ext_resource type="Script" path="res://scripts/character/player/states/run_state.gd" id="7_cgfo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3syqg"]
 size = Vector2(16, 16)
@@ -18,3 +22,17 @@ texture = ExtResource("2_pb85r")
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("3_nfwgp")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_kvt3s")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("5_071iq")
+
+[node name="WalkState" type="Node" parent="StateMachine"]
+script = ExtResource("6_whvp4")
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("7_cgfo6")
+run_speed = 200.0
