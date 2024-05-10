@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterStats" load_steps=2 format=3 uid="uid://dkxv4iuilolxd"]
+
+[ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="1_etg7t"]
+
+[resource]
+script = ExtResource("1_etg7t")
+hp = 1
+mp = 1
+xp = 0
+attack = 0
+defense = 0
+starting_hp = 1
+starting_mp = 1
+starting_xp = 0
+starting_attack = 0
+starting_defense = 0

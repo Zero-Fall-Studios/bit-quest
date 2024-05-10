@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://do51d1tc4nsbh"]
+[gd_scene load_steps=10 format=3 uid="uid://do51d1tc4nsbh"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_cek5b"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_imlqm"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_xe7i2"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_1x6h8"]
+[ext_resource type="Script" path="res://scripts/character/npc/states/npc_idle_state.gd" id="5_03ww3"]
 [ext_resource type="Script" path="res://scripts/character/npc/states/wander_state.gd" id="5_s3gwa"]
 [ext_resource type="Script" path="res://scripts/character/npc/states/follow_state.gd" id="6_eayad"]
 [ext_resource type="Script" path="res://scripts/character/behaviors/aggro.gd" id="7_ehysb"]
@@ -13,9 +14,6 @@ size = Vector2(16, 16)
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_cek5b")
-max_speed = null
-acceleration = null
-friction = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.271741, 0.54317, 1, 1)
@@ -29,7 +27,11 @@ script = ExtResource("3_xe7i2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_1x6h8")
-initial_state = NodePath("WanderState")
+initial_state = NodePath("NpcIdleState")
+
+[node name="NpcIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("aggro")]
+script = ExtResource("5_03ww3")
+aggro = NodePath("../../Aggro")
 
 [node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("aggro")]
 script = ExtResource("5_s3gwa")

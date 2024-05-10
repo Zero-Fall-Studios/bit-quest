@@ -1,31 +1,87 @@
-[gd_scene load_steps=9 format=3 uid="uid://q28w184q466y"]
+[gd_scene load_steps=15 format=3 uid="uid://q28w184q466y"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_28fcs"]
+[ext_resource type="Resource" uid="uid://dkxv4iuilolxd" path="res://resources/player_stats.tres" id="2_fnjid"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_pb85r"]
 [ext_resource type="Script" path="res://scripts/character/controls/player_controls.gd" id="3_nfwgp"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_kvt3s"]
 [ext_resource type="Script" path="res://scripts/character/player/states/idle_state.gd" id="5_071iq"]
+[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_tw0xa"]
 [ext_resource type="Script" path="res://scripts/character/player/states/walk_state.gd" id="6_whvp4"]
 [ext_resource type="Script" path="res://scripts/character/player/states/run_state.gd" id="7_cgfo6"]
+[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="10_plokr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3syqg"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_bs2s3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_0n7vt"]
+resource_name = "Spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lwnw"]
+_data = {
+"RESET": SubResource("Animation_bs2s3"),
+"Spawn": SubResource("Animation_0n7vt")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_28fcs")
+character_stats = ExtResource("2_fnjid")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3syqg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.698039, 0.909804, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_pb85r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../StateMachine/SpawnState")
+libraries = {
+"": SubResource("AnimationLibrary_0lwnw")
+}
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("3_nfwgp")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_kvt3s")
-initial_state = NodePath("IdleState")
+initial_state = NodePath("SpawnState")
+
+[node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("6_tw0xa")
+next_state = NodePath("../IdleState")
+group = "player_spawn"
+animation = "Spawn"
+wait_for_animation = true
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_071iq")
@@ -36,3 +92,6 @@ script = ExtResource("6_whvp4")
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("7_cgfo6")
 run_speed = 200.0
+
+[node name="DieState" type="Node" parent="StateMachine"]
+script = ExtResource("10_plokr")

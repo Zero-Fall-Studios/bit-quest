@@ -7,8 +7,9 @@ func process_physics(_delta: float) -> State:
       if parent.controls.is_running():
         return state_machine.states.get("RunState")
       return state_machine.states.get("WalkState")
-      
+	  
   parent.apply_friction()
   parent.clamp_velocity()
-  parent.move_and_slide()
+  if parent.move_and_slide():
+    parent.handle_collisions_from_slide()
   return null

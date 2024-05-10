@@ -13,6 +13,7 @@ func process_physics(_delta: float) -> State:
     parent.apply_acceleration(movement_input, run_speed)
   
   parent.clamp_velocity()
-  parent.move_and_slide()
+  if parent.move_and_slide():
+    parent.handle_collisions_from_slide()
 
   return null

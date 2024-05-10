@@ -1,9 +1,14 @@
 class_name State extends Node
 
+@export var animation: String
+@export var wait_for_animation: bool = false
+
 var parent: Character
 var state_machine: StateMachine
 
 func enter() -> void:
+  if animation and parent.animation_player != null:
+    parent.animation_player.play(animation)
   return
 
 func exit() -> void:

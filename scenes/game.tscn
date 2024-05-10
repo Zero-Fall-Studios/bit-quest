@@ -1,62 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://3bg68s454lxs"]
+[gd_scene load_steps=4 format=3 uid="uid://3bg68s454lxs"]
 
-[ext_resource type="PackedScene" uid="uid://q28w184q466y" path="res://scenes/characters/player.tscn" id="1_uxv67"]
-[ext_resource type="PackedScene" uid="uid://do51d1tc4nsbh" path="res://scenes/characters/npc.tscn" id="2_cvo7m"]
-[ext_resource type="PackedScene" uid="uid://b23ielbj1gg1s" path="res://scenes/characters/npc_2.tscn" id="3_72j5o"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c223n"]
-size = Vector2(20, 195)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_15a0k"]
-size = Vector2(20, 195)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srp4k"]
-size = Vector2(345, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bf805"]
-size = Vector2(345, 19)
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_j1to8"]
+[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_rspcn"]
+[ext_resource type="PackedScene" uid="uid://b6slnj6s2yum6" path="res://scenes/environment/block.tscn" id="3_manry"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_j1to8")
 
-[node name="Player" parent="." instance=ExtResource("1_uxv67")]
-position = Vector2(105, 79)
-max_speed = 200.0
-friction = 5.0
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 
-[node name="npc2" parent="." instance=ExtResource("3_72j5o")]
-position = Vector2(181, 124)
-max_speed = 300.0
-acceleration = 50.0
-friction = 70.0
+[node name="Block" parent="." instance=ExtResource("3_manry")]
+position = Vector2(128, 48)
 
-[node name="NPC" parent="." instance=ExtResource("2_cvo7m")]
-position = Vector2(256, 64)
-max_speed = 300.0
-acceleration = 10.0
-friction = 5.0
+[node name="Block2" parent="." instance=ExtResource("3_manry")]
+position = Vector2(128, 88)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Block3" parent="." instance=ExtResource("3_manry")]
+position = Vector2(128, 128)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 87.5)
-shape = SubResource("RectangleShape2D_c223n")
+[node name="PlayerSpawn" type="Node2D" parent="." groups=["player_spawn"]]
+position = Vector2(37, 35)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(324, -1)
+[node name="EnemySpawn" type="Node2D" parent="." groups=["enemy_spawn"]]
+position = Vector2(263, 55)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, 87.5)
-shape = SubResource("RectangleShape2D_15a0k")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(162.5, -0.5)
-shape = SubResource("RectangleShape2D_srp4k")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(1, 182)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(162.5, -0.5)
-shape = SubResource("RectangleShape2D_bf805")
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rspcn")

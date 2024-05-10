@@ -1,0 +1,154 @@
+[gd_scene load_steps=24 format=3 uid="uid://bowvn7cgfqwon"]
+
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_rik0r"]
+[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_2ftae"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_ngvgo"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_64b3s"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_bnme5"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/aggro.gd" id="5_op6mf"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="6_8dx1c"]
+[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_ucqk2"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="7_254hl"]
+[ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_bucr7"]
+[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="7_k0gp0"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="8_yln3g"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/has_target_condition.gd" id="9_vvlhr"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/set_modulate_color.gd" id="10_yl625"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/follow_action.gd" id="11_1njw6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_mf1fh"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="13_e0upd"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/wander_action.gd" id="14_yjrbt"]
+
+[sub_resource type="Resource" id="Resource_qf1ob"]
+script = ExtResource("2_ngvgo")
+hp = 100
+mp = 100
+xp = 1
+attack = 1
+defense = 0
+starting_hp = 100
+starting_mp = 100
+starting_xp = 0
+starting_attack = 1
+starting_defense = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlag5"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_k8csq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4c43c"]
+resource_name = "Spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehmjd"]
+_data = {
+"RESET": SubResource("Animation_k8csq"),
+"Spawn": SubResource("Animation_4c43c")
+}
+
+[node name="WanderingEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_rik0r")
+character_stats = SubResource("Resource_qf1ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tlag5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_2ftae")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehmjd")
+}
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("3_64b3s")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_bnme5")
+initial_state = NodePath("SpawnState")
+
+[node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("6_ucqk2")
+next_state = NodePath("../AliveState")
+group = "enemy_spawn"
+animation = "Spawn"
+
+[node name="AliveState" type="Node" parent="StateMachine"]
+script = ExtResource("7_bucr7")
+
+[node name="DieState" type="Node" parent="StateMachine"]
+script = ExtResource("7_k0gp0")
+
+[node name="Aggro" type="Node" parent="."]
+script = ExtResource("5_op6mf")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("6_8dx1c")
+blackboard = NodePath("@Node@17519")
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("7_254hl")
+
+[node name="Follow" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("8_yln3g")
+
+[node name="HasTargetCondition" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
+script = ExtResource("9_vvlhr")
+
+[node name="SetModulateColor" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
+script = ExtResource("10_yl625")
+modulate_color = Color(1, 0, 0, 1)
+interpolation_time = 0.5
+
+[node name="FollowAction" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
+script = ExtResource("11_1njw6")
+wait_time = 5.0
+
+[node name="Wander" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("8_yln3g")
+
+[node name="NotHasTarget" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
+script = ExtResource("12_mf1fh")
+
+[node name="HasTargetCondition" type="Node" parent="BeehaveTree/SelectorComposite/Wander/NotHasTarget"]
+script = ExtResource("9_vvlhr")
+
+[node name="SetModulateColor" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
+script = ExtResource("10_yl625")
+interpolation_time = 0.5
+
+[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
+script = ExtResource("13_e0upd")
+
+[node name="WanderAction" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
+script = ExtResource("14_yjrbt")
+wander_speed = 50.0
+wait_time = 5.0
