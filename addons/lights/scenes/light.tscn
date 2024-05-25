@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://vjt8aw6behoj"]
+
+[ext_resource type="Script" path="res://addons/lights/scenes/light.gd" id="1_56oyc"]
+[ext_resource type="Texture2D" uid="uid://cink5p3q0ct6a" path="res://addons/lights/assets/light.png" id="1_v3lvx"]
+[ext_resource type="PackedScene" uid="uid://bymd05usws7dt" path="res://addons/lights/scenes/trail.tscn" id="3_fhtkl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byubs"]
+size = Vector2(14, 14)
+
+[node name="Light" type="CharacterBody2D"]
+script = ExtResource("1_56oyc")
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(0.09, 0.833, 4.734, 1)
+texture = ExtResource("1_v3lvx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 2.07
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 10.3
+texture = ExtResource("1_v3lvx")
+texture_scale = 7.86
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_byubs")
+
+[node name="Trail" parent="." instance=ExtResource("3_fhtkl")]

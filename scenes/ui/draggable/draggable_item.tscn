@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7x3udkbl8yvm"]
+
+[ext_resource type="Script" path="res://scenes/ui/draggable/draggable_item.gd" id="1_3miwi"]
+[ext_resource type="Texture2D" uid="uid://cyubp5bn3ohhx" path="res://assets/images/InventorySlot.png" id="2_7jton"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://examples/inventory.tres" id="2_mmeag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5htf5"]
+size = Vector2(16, 16)
+
+[node name="DraggableItem" type="Area2D" groups=["draggable_item"]]
+z_index = 5
+script = ExtResource("1_3miwi")
+inventory = ExtResource("2_mmeag")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7jton")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5htf5")

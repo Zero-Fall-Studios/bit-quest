@@ -10,6 +10,9 @@ class_name Character extends CharacterBody2D
 @export_group("Stats")
 @export var character_stats: CharacterStats
 
+@export_group("Spawning")
+@export var spawn_position: Node2D
+
 @onready var controls: CharacterControls = $Controls
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
@@ -28,51 +31,28 @@ func _ready():
 	hide()
 	is_alive = false
 	is_paralyzed = true
-	state_machine.init(self)
-
-func _has_controls():
-	for child in get_children():
-		if child is CharacterControls and child.name == "Controls":
-			return true
-	return false
-
-func _has_state_machine():
-	for child in get_children():
-		if child is StateMachine and child.name == "StateMachine":
-			return true
-	return false
-
-func _get_configuration_warnings():
-	var warnings = []
-
-	var has_controls = _has_controls()
-
-	if not has_controls:
-		warnings.append("Please assign a `CharacterControls` node to the `Controls` variable.")
-
-	var has_state_machine = _has_state_machine()
-
-	if not has_state_machine:
-		warnings.append("Please assign a `StateMachine` node to the `StateMachine` variable.")
-
-	return warnings
+	if state_machine:
+		state_machine.init(self)
 
 func _unhandled_input(event):
 	if Engine.is_editor_hint():
 		return
 	if is_paralyzed:
 		return
-	state_machine.process_input(event)
+	if state_machine:
+		state_machine.process_input(event)
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
-	state_machine.process_physics(delta)
+	if state_machine:
+		state_machine.process_physics(delta)
 
 func _process(delta):
 	if Engine.is_editor_hint():
 		return
-	state_machine.process_frame(delta)
+	if state_machine:
+		state_machine.process_frame(delta)
 
 func apply_acceleration(direction: Vector2, speed: float):
 	if direction.length() > 0:

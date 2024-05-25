@@ -1,0 +1,135 @@
+[gd_scene load_steps=22 format=3 uid="uid://kw8m1246r870"]
+
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_gvyob"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_jheat"]
+[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_in5ys"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_5jwas"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="5_0ptf6"]
+[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_idvil"]
+[ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_xsp0f"]
+[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_u6qie"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="9_1gl3w"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_nrocr"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_rr8tw"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="11_covqa"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_odkn4"]
+[ext_resource type="PackedScene" uid="uid://bj2divs05b4xu" path="res://scenes/interactions/talk_interaction.tscn" id="12_86sbv"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/is_talking.gd" id="12_wqh3c"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/dialogue_wait_until_finished_action.gd" id="14_vddhx"]
+
+[sub_resource type="Resource" id="Resource_ghxqv"]
+script = ExtResource("2_jheat")
+hp = 100
+mp = 100
+xp = 1
+attack = 1
+defense = 0
+starting_hp = 100
+starting_mp = 100
+starting_xp = 0
+starting_attack = 1
+starting_defense = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlag5"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_k8csq"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4c43c"]
+resource_name = "Spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehmjd"]
+_data = {
+"RESET": SubResource("Animation_k8csq"),
+"Spawn": SubResource("Animation_4c43c")
+}
+
+[node name="IdleNpc" type="CharacterBody2D"]
+script = ExtResource("1_gvyob")
+character_stats = SubResource("Resource_ghxqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tlag5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_in5ys")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehmjd")
+}
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("4_5jwas")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_0ptf6")
+initial_state = NodePath("SpawnState")
+
+[node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("6_idvil")
+next_state = NodePath("../AliveState")
+animation = "Spawn"
+wait_for_animation = true
+
+[node name="AliveState" type="Node" parent="StateMachine"]
+script = ExtResource("7_xsp0f")
+
+[node name="DieState" type="Node" parent="StateMachine"]
+script = ExtResource("8_u6qie")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("10_nrocr")
+blackboard = NodePath("@Node@17311")
+actor = NodePath("..")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("10_rr8tw")
+
+[node name="Talking" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("11_odkn4")
+
+[node name="IsTalkingCondition" type="Node" parent="BeehaveTree/SelectorComposite/Talking" node_paths=PackedStringArray("talk_interaction")]
+script = ExtResource("12_wqh3c")
+talk_interaction = NodePath("../../../../TalkInteraction")
+
+[node name="DialogueWaitUntilFinishedAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("14_vddhx")
+
+[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("9_1gl3w")
+
+[node name="TargetInRange" type="Node" parent="."]
+script = ExtResource("11_covqa")
+
+[node name="TalkInteraction" parent="." node_paths=PackedStringArray("target_in_range") instance=ExtResource("12_86sbv")]
+position = Vector2(0, -22)
+target_in_range = NodePath("../TargetInRange")
+dialogue_interaction_path = "res://resources/dialogue_interaction.dsf"

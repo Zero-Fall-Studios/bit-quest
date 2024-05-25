@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=3 uid="uid://ein1ed3f8t70"]
+
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_80m75"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_5pju4"]
+[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_u0l2n"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_74quo"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_gnc0v"]
+[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="5_51fdr"]
+[ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="6_wv7rl"]
+[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="7_dp3kx"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_1fj45"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="9_mqi22"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="9_qdc7c"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/wander_action.gd" id="11_442vo"]
+
+[sub_resource type="Resource" id="Resource_ghxqv"]
+script = ExtResource("2_5pju4")
+hp = 100
+mp = 100
+xp = 1
+attack = 1
+defense = 0
+starting_hp = 100
+starting_mp = 100
+starting_xp = 0
+starting_attack = 1
+starting_defense = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlag5"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_k8csq"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_4c43c"]
+resource_name = "Spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehmjd"]
+_data = {
+"RESET": SubResource("Animation_k8csq"),
+"Spawn": SubResource("Animation_4c43c")
+}
+
+[node name="WanderingNpc" type="CharacterBody2D"]
+script = ExtResource("1_80m75")
+character_stats = SubResource("Resource_ghxqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tlag5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_u0l2n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehmjd")
+}
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("4_74quo")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_gnc0v")
+initial_state = NodePath("SpawnState")
+
+[node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
+script = ExtResource("5_51fdr")
+next_state = NodePath("../AliveState")
+animation = "Spawn"
+wait_for_animation = true
+
+[node name="AliveState" type="Node" parent="StateMachine"]
+script = ExtResource("6_wv7rl")
+
+[node name="DieState" type="Node" parent="StateMachine"]
+script = ExtResource("7_dp3kx")
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("8_1fj45")
+blackboard = NodePath("@Node@17994")
+actor = NodePath("..")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("9_qdc7c")
+
+[node name="IdleAction" type="Node" parent="BeehaveTree/SequenceComposite"]
+script = ExtResource("9_mqi22")
+wait_time = 3.0
+
+[node name="WanderAction" type="Node" parent="BeehaveTree/SequenceComposite"]
+script = ExtResource("11_442vo")
+wander_speed = 50.0
+wait_time = 5.0

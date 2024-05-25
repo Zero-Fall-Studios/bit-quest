@@ -1,0 +1,129 @@
+[
+  {
+	"id": "zc4hlxqfdlugubyemdqhugbu",
+	"name": "Silver Sword",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "k4mak95ym44ao4usimpsjbvw",
+	"name": "Silver Axe",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "bm3iv8cjwbe344vas12vs5pp",
+	"name": "Silver Mace",
+	"is_unique": false,
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "icuebs60sks7rjuovph7r2rm",
+	"name": "Silver Short Sword",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "ghjqznqglmtyjci9ld4wnm1k",
+	"name": "Bronze Sword",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "wqatbv5fvth2gysxpzwlcdza",
+	"name": "Bronze Axe",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "etg6ijpdhg8xt1xrscn4s6l3",
+	"name": "Bronze Mace",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "satz9sa28m1lsojkq7m1596m",
+	"name": "Bronze Short Sword",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "mmzrwhzwlhl9mios9t0zmny0",
+	"name": "Silver Bow",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "ijdgwuhy4ial81n37vktd7yp",
+	"name": "Silver Wand",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "bonj6exmv51rakhpg4u0a8bt",
+	"name": "Bronze Bow",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "ue0hk00d6xdc02ykn2ld39jv",
+	"name": "Bronze Wand",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "pasown62y74epyhvin19ov7h",
+	"name": "Small Silver Shield",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "o1qhuuppujab4w82qwyagucs",
+	"name": "Silver Shield",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "dp0jyyu5ucqb0zq6ymion6n9",
+	"name": "Small Bronze Shield",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  },
+  {
+	"id": "kgi5s7gdnmoo6qr6oh6o0wdw",
+	"name": "Bronze Shield",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Armor"
+  }
+]

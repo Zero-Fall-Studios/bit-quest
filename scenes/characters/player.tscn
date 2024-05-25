@@ -79,7 +79,6 @@ initial_state = NodePath("SpawnState")
 [node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("6_tw0xa")
 next_state = NodePath("../IdleState")
-group = "player_spawn"
 animation = "Spawn"
 wait_for_animation = true
 

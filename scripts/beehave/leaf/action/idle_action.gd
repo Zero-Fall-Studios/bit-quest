@@ -5,12 +5,12 @@ class_name IdleAction extends ActionLeaf
 var time_passed := 0.0
 var has_timer_finished := false
 
-func before_run(actor: Node, blackboard: Blackboard) -> void:
+func before_run(actor: Node, _blackboard: Blackboard) -> void:
 	time_passed = 0.0
 	has_timer_finished = false
 	actor.freeze()
 
-func tick(actor: Node, blackboard: Blackboard) -> int:
+func tick(actor: Node, _blackboard: Blackboard) -> int:
 	if actor.target:
 		return FAILURE
 	if has_timer_finished == false:

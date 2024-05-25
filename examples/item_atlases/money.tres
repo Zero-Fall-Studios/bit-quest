@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemAtlas" load_steps=3 format=3 uid="uid://cvk2ffuc3j1e1"]
+
+[ext_resource type="Script" path="res://scripts/resources/item_atlas.gd" id="1_dai2u"]
+[ext_resource type="Texture2D" uid="uid://cl7oy6iyjl841" path="res://assets/images/Coin.png" id="2_tf83k"]
+
+[resource]
+script = ExtResource("1_dai2u")
+texture = ExtResource("2_tf83k")
+json_src = "res://examples/item_atlases/money-items.json"
+interval = 16
+width = 2
+height = 1
+item_index = 1

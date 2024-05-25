@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bkbeh7sgw1fur"]
+
+[ext_resource type="Texture2D" uid="uid://b5otdi1esgr0n" path="res://assets/images/panel.png" id="1_huu1f"]
+[ext_resource type="FontFile" uid="uid://bpemy6eb6xjf5" path="res://assets/fonts/PixelFont.ttf" id="1_immqg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nd5ft"]
+texture = ExtResource("1_huu1f")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[resource]
+default_font = ExtResource("1_immqg")
+Panel/styles/panel = SubResource("StyleBoxTexture_nd5ft")

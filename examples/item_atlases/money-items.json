@@ -1,0 +1,18 @@
+[
+  {
+	"id": "zc4hlxqfdlugubyemdqhugbp",
+	"name": "Gold Coin",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Money"
+  },
+  {
+	"id": "zc4hlxqfdlugfbyemdqhugbp",
+	"name": "Gold Coin Half",
+	"is_unique": false,
+	"max_stack_amount": "1",
+	"quantity": "1",
+	"type": "Money"
+  }
+]

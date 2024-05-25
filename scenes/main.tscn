@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://briwi8uruvil5"]
+
+[ext_resource type="PackedScene" uid="uid://b1wkt4sx0qqp0" path="res://scenes/ui/inventory_ui.tscn" id="1_i4d7g"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_m2dbq"]
+[ext_resource type="PackedScene" uid="uid://bacc0kqeepab1" path="res://scenes/pickup.tscn" id="2_liugc"]
+[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://examples/item_atlases/money.tres" id="4_qb3b3"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_m2dbq")
+
+[node name="Pickup" parent="." instance=ExtResource("2_liugc")]
+visible = true
+position = Vector2(106, 267)
+item_index = 0
+autospawn = true
+respawn_time = 2.0
+
+[node name="Pickup2" parent="." instance=ExtResource("2_liugc")]
+visible = true
+position = Vector2(154, 311)
+item_index = 5
+autospawn = true
+respawn_time = 2.0
+
+[node name="Pickup3" parent="." instance=ExtResource("2_liugc")]
+visible = true
+position = Vector2(203, 267)
+item_index = 10
+autospawn = true
+respawn_time = 2.0
+
+[node name="Pickup4" parent="." instance=ExtResource("2_liugc")]
+visible = true
+position = Vector2(384, 187)
+item_atlas = ExtResource("4_qb3b3")
+item_index = 0
+autospawn = true
+respawn_time = 5.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource("1_i4d7g")]
+offset_left = 27.0
+offset_top = 10.0
+offset_right = 27.0
+offset_bottom = 10.0
+metadata/_edit_use_anchors_ = true

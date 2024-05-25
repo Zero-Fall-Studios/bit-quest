@@ -1,0 +1,17 @@
+# Scene 1
+Innkeeper: Hello, traveler! What brings you to these parts?
+- What is this place? -> Scene 2
+- Let me look at your wares. -> Scene 3
+- I'm looking for a job. -> Scene 4
+  
+# Scene 2
+NPC: This is the town of Riverwood. I'm the blacksmith here.
+NPC: I can help you with anything you need.
+
+# Scene 3
+NPC: Please feel free to take a look.
+NPC: [action=open_shop]
+
+# Scene 4
+NPC: I could use some help around the forge.
+NPC: I'll pay you for your time.

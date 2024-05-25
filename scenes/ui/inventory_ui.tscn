@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1wkt4sx0qqp0"]
+
+[ext_resource type="Script" path="res://scenes/ui/inventory_ui.gd" id="1_h5fyq"]
+[ext_resource type="Resource" uid="uid://d30j1wi18duu7" path="res://examples/save_game.tres" id="2_67xub"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://examples/inventory.tres" id="2_aqro3"]
+[ext_resource type="Resource" uid="uid://cfc4rj3eghbjo" path="res://examples/equipment.tres" id="3_plqht"]
+[ext_resource type="PackedScene" uid="uid://c8w0ac0cn7b3h" path="res://scenes/ui/slot/slot.tscn" id="4_lf23g"]
+[ext_resource type="PackedScene" uid="uid://c7x3udkbl8yvm" path="res://scenes/ui/draggable/draggable_item.tscn" id="7_0g75k"]
+[ext_resource type="PackedScene" uid="uid://b04ii0ud80tpv" path="res://scenes/ui/slot/equipment_slot.tscn" id="7_gfkhm"]
+
+[node name="InventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -36.0
+offset_right = -39.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_h5fyq")
+save_game = ExtResource("2_67xub")
+inventory = ExtResource("2_aqro3")
+equipment = ExtResource("3_plqht")
+slot = ExtResource("4_lf23g")
+draggable_item_scene = ExtResource("7_0g75k")
+grid = Vector2(5, 3)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 323.0
+offset_bottom = 232.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 31.0
+offset_right = 204.0
+offset_bottom = 160.0
+mouse_filter = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 242.0
+offset_right = 377.0
+offset_bottom = 265.0
+text = "Money: 0"
+
+[node name="HelmetSlot" parent="." instance=ExtResource("7_gfkhm")]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NeckSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 229.0
+offset_top = 48.0
+offset_right = 269.0
+offset_bottom = 88.0
+equipment_slot_type = 2
+
+[node name="ChestSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 229.0
+offset_top = 72.0
+offset_right = 269.0
+offset_bottom = 112.0
+equipment_slot_type = 3
+
+[node name="WaistSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 228.0
+offset_top = 96.0
+offset_right = 268.0
+offset_bottom = 136.0
+equipment_slot_type = 4
+
+[node name="LegsSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 228.0
+offset_top = 121.0
+offset_right = 268.0
+offset_bottom = 161.0
+equipment_slot_type = 5
+
+[node name="BootsSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 230.0
+offset_top = 145.0
+offset_right = 270.0
+offset_bottom = 185.0
+
+[node name="GlovesSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 258.0
+offset_top = 70.0
+offset_right = 298.0
+offset_bottom = 110.0
+equipment_slot_type = 7
+
+[node name="LeftRingSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 200.0
+offset_top = 117.0
+offset_right = 240.0
+offset_bottom = 157.0
+equipment_slot_type = 8
+
+[node name="RightRingSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 255.0
+offset_top = 118.0
+offset_right = 295.0
+offset_bottom = 158.0
+equipment_slot_type = 9
+
+[node name="LeftHandSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 199.0
+offset_top = 93.0
+offset_right = 239.0
+offset_bottom = 133.0
+equipment_slot_type = 10
+
+[node name="RightHandSlot" parent="." instance=ExtResource("7_gfkhm")]
+offset_left = 256.0
+offset_top = 95.0
+offset_right = 296.0
+offset_bottom = 135.0
+equipment_slot_type = 10
