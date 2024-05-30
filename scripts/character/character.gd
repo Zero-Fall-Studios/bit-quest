@@ -17,11 +17,13 @@ class_name Character extends CharacterBody2D
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var target_in_range: TargetInRange = $TargetInRange
 
 signal on_spawn(c: Character, pos)
 signal on_die(c: Character, pos)
 
 var target
+var targets = []
 var is_alive: bool = false
 var is_paralyzed: bool = false
 

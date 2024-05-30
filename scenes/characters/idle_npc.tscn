@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://kw8m1246r870"]
+[gd_scene load_steps=25 format=3 uid="uid://kw8m1246r870"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_gvyob"]
 [ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_jheat"]
@@ -9,13 +9,16 @@
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_xsp0f"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_u6qie"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="9_1gl3w"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="9_ginu2"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_nrocr"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="10_rr8tw"]
-[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="11_covqa"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_odkn4"]
-[ext_resource type="PackedScene" uid="uid://bj2divs05b4xu" path="res://scenes/interactions/talk_interaction.tscn" id="12_86sbv"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/is_talking.gd" id="12_wqh3c"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/action/dialogue_wait_until_finished_action.gd" id="14_vddhx"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/is_within_range.gd" id="12_5y0d6"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_show.gd" id="13_cd6ai"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="14_8q42t"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/wait_for_interaction.gd" id="15_d2yu7"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_hide.gd" id="16_bgii4"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/dialogue_action.gd" id="16_isci7"]
 
 [sub_resource type="Resource" id="Resource_ghxqv"]
 script = ExtResource("2_jheat")
@@ -105,9 +108,12 @@ script = ExtResource("7_xsp0f")
 [node name="DieState" type="Node" parent="StateMachine"]
 script = ExtResource("8_u6qie")
 
+[node name="TargetInRange" type="Node" parent="."]
+script = ExtResource("9_ginu2")
+
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_nrocr")
-blackboard = NodePath("@Node@17311")
+blackboard = NodePath("@Node@17305")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
@@ -116,20 +122,31 @@ script = ExtResource("10_rr8tw")
 [node name="Talking" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("11_odkn4")
 
-[node name="IsTalkingCondition" type="Node" parent="BeehaveTree/SelectorComposite/Talking" node_paths=PackedStringArray("talk_interaction")]
-script = ExtResource("12_wqh3c")
-talk_interaction = NodePath("../../../../TalkInteraction")
+[node name="IsWithinRange" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("12_5y0d6")
 
-[node name="DialogueWaitUntilFinishedAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
-script = ExtResource("14_vddhx")
+[node name="InteractionUIShowAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("13_cd6ai")
+offset = Vector2(0, -25)
 
-[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite"]
-script = ExtResource("9_1gl3w")
+[node name="WaitForInterAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("15_d2yu7")
 
-[node name="TargetInRange" type="Node" parent="."]
-script = ExtResource("11_covqa")
-
-[node name="TalkInteraction" parent="." node_paths=PackedStringArray("target_in_range") instance=ExtResource("12_86sbv")]
-position = Vector2(0, -22)
-target_in_range = NodePath("../TargetInRange")
+[node name="DialogueAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("16_isci7")
 dialogue_interaction_path = "res://resources/dialogue_interaction.dsf"
+
+[node name="Idle" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("11_odkn4")
+
+[node name="NotWithinRange" type="Node" parent="BeehaveTree/SelectorComposite/Idle"]
+script = ExtResource("14_8q42t")
+
+[node name="IsWithinRange" type="Node" parent="BeehaveTree/SelectorComposite/Idle/NotWithinRange"]
+script = ExtResource("12_5y0d6")
+
+[node name="InteractionUIHideAction" type="Node" parent="BeehaveTree/SelectorComposite/Idle"]
+script = ExtResource("16_bgii4")
+
+[node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/Idle"]
+script = ExtResource("9_1gl3w")

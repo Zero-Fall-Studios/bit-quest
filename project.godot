@@ -23,6 +23,7 @@ PickupSignalBus="*res://scripts/autoload/pickup_signal_bus.gd"
 SceneManager="*res://scripts/autoload/scene_manager.tscn"
 Dialogue="*res://scripts/autoload/dialogue.tscn"
 DialogueParser="*res://scripts/dialogue/dialogue_parser.gd"
+InteractionUi="*res://scenes/interactions/interaction_ui.tscn"
 
 [display]
 

@@ -1,15 +1,15 @@
 class_name DialogueAction extends ActionLeaf
 
-@export var talk_interaction: TalkInteraction
-@export var message: String = "Hello, World!"
-
-func before_run(_actor: Node, _blackboard: Blackboard) -> void:
-	if not talk_interaction.has_completed:
-		talk_interaction.run()
+@export_file("*.dsf") var dialogue_interaction_path: String = ""
 
 func tick(actor: Node, _blackboard: Blackboard) -> int:
+
+	if not Dialogue.is_playing:
+		Dialogue.run(dialogue_interaction_path)
+		return RUNNING
+
 	if not actor.target or Dialogue.is_finished:
-		talk_interaction.stop()
+		Dialogue.stop()
 		return SUCCESS
 
 	return RUNNING

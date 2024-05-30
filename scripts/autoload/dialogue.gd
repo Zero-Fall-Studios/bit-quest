@@ -15,25 +15,19 @@ extends Node
 
 var is_playing = false
 var is_finished = false
+
 var current_index = 0
 var typing_speed = 0.05
 var show_next = false
-var stop_dialogue = false
-var current_scene = "Scene 1"
 var is_showing_choices = false
 var choice_selected_index = 0
-var initial_scene_name = "Scene 1"
 var current_dialog_index = 0
 var dialogue_data
-var current_scene_name = initial_scene_name
-
-func _ready() -> void:
-	animation_player.play("fade_out")
-	canvas_layer.hide()
+var current_scene_name = "Scene 1"
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if is_playing and Input.is_action_just_pressed("interact"):
-		animation_player.seek(animation_player.current_animation_length)
+		animation_player.advance(1)
 	elif is_showing_choices:
 		if Input.is_action_just_pressed("ui_up"):
 			right_arrow.position.y -= 25
@@ -50,112 +44,80 @@ func _unhandled_input(_event: InputEvent) -> void:
 		elif Input.is_action_just_pressed("ui_accept"):
 			_on_choice_selected(choice_selected_index)
 
+func show_ui():
+	if not is_playing:
+		return
+	speaker_name.text = ""
+	speaker_text.text = ""
+	animation_player.play("fade_in")
+	await animation_player.animation_finished
+
 func show_dialogues(dialogues: Array) -> void:
-	is_playing = true
-	is_finished = false
-	show_next = false
-	stop_dialogue = false
-	speaker_name.text = ""
-	speaker_text.text = ""
-	canvas_layer.show()
-	animation_player.play("fade_in")
-	await animation_player.animation_finished
-
+	if not is_playing:
+		return
+	choice_1.text = ""
+	choice_2.text = ""
+	choice_3.text = ""
 	for dialogue in dialogues:
-
-		speaker_name.text = dialogue["speaker"] + ":"
-		speaker_text.text = dialogue["text"]
-
-		animation_player.play("speak")
-		await animation_player.animation_finished
+		for text in dialogue["text"]:
+			if not is_playing:
+				return
+			speaker_name.text = dialogue["speaker"] + ":"
+			speaker_text.text = text
+			animation_player.play("speak")
+			await animation_player.animation_finished
 		
-		if stop_dialogue:
-			break
-		await get_tree().create_timer(dialogue["duration"]).timeout
-	animation_player.play("fade_out")
-	await animation_player.animation_finished
-	is_playing = false
-	is_finished = true
-	show_next = false
-	speaker_name.text = ""
-	speaker_text.text = ""
-
 func show_choices(choices: Array) -> void:
-	is_playing = true
-	is_finished = false
-	show_next = false
-	stop_dialogue = false
+	if not is_playing:
+		return
+	is_showing_choices = true
 	speaker_name.text = ""
 	speaker_text.text = ""
-	canvas_layer.show()
-	animation_player.play("fade_in")
-	await animation_player.animation_finished
-
 	choice_1.text = choices[0]["text"]
 	choice_2.text = choices[1]["text"]
 	choice_3.text = choices[2]["text"]
-
 	animation_player.play("show_choices")
 	await animation_player.animation_finished
-
 	animation_player.play("cursor")
 
-	is_showing_choices = true
-
 func stop():
-	stop_dialogue = true
-	animation_player.stop()
+	is_playing = false
+	is_finished = true
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	choice_1.text = ""
+	choice_2.text = ""
+	choice_3.text = ""
+	speaker_name.text = ""
+	speaker_text.text = ""
 
-func run(data):
-	dialogue_data = data
-	var current_speaker = get_current_speaker()
-	var current_text = get_current_text()
-	print("current_text", current_text)
-	print("current_speaker", current_speaker)
-	await show_dialogues([{"text": current_text, "speaker": current_speaker, "duration": 1}])
-
+func run_choices():
 	var current_choices = get_current_choices()
-	print("current_choices", current_choices)
 	if current_choices.size() > 0:
 		await show_choices(current_choices)
 
-	var has_next_dialog = get_next_dialogue()
+func run_dialogue():
+	var current_speaker = get_current_speaker()
+	var current_text = get_current_text()
+	await show_dialogues([{"text": current_text, "speaker": current_speaker, "duration": 1}])
+	await run_choices()
 
-	print("has_next_dialog", has_next_dialog)
+	var next_scene_name = get_next_scene_name()
+	if next_scene_name:
+		current_scene_name = next_scene_name
+		current_dialog_index = 0
+		await run_choices()
+	
+	if not is_showing_choices and not is_finished:
+		stop()
 
-	# if has_next_dialog:
-	# 	current_dialog_index += 1
-	# 	run()
-	# else:
-	# 	has_completed = true
-	# 	stop()
-
-func show_next_dialogue() -> void:
-	for scene in dialogue_data:
-			if scene["name"] == current_scene:
-					var entries: Array[Dictionary] = scene["dialogue"]
-					if current_index < entries.size():
-							var entry: Dictionary = entries[current_index]
-							print("%s: %s" % [entry["speaker"], entry["text"]])
-							for i in range(entry["choices"].size()):
-									print("%d. %s" % [i + 1, entry["choices"][i]["text"]])
-							current_index += 1
-					else:
-							print("End of scene.")
-					return
-
-func choose_option(option: int) -> void:
-	for scene in dialogue_data:
-			if scene["name"] == current_scene:
-					var entries: Array[Dictionary] = scene["dialogue"]
-					if current_index > 0 and current_index <= entries.size():
-							var entry: Dictionary = entries[current_index - 1]
-							if option > 0 and option <= entry["choices"].size():
-									current_scene = entry["choices"][option - 1]["next_scene"]
-									current_index = 0
-									show_next_dialogue()
-					return
-
+func run(file_path):
+	dialogue_data = DialogueParser.parse_by_file_name(file_path)
+	is_playing = true
+	is_finished = false
+	await show_ui()
+	run_dialogue()
+	
 func find_scene(scene_name) -> Dictionary:
 	if dialogue_data.size() > 0:
 		for dialogue in dialogue_data:
@@ -174,6 +136,11 @@ func get_next_dialogue():
 		return get_current_scene()["dialogue"][current_dialog_index + 1]
 	return null
 
+func get_next_scene_name():
+	if get_current_dialogue().has("next_scene"):
+		return get_current_dialogue()["next_scene"]
+	return null
+
 func get_current_speaker():
 	return get_current_dialogue()["speaker"]
 
@@ -181,14 +148,15 @@ func get_current_text():
 	return get_current_dialogue()["text"]
 
 func get_current_choices():
+	if not get_current_dialogue().has("choices"):
+		return []
 	return get_current_dialogue()["choices"]
 
 func _on_choice_selected(choice_index: int):
+	is_showing_choices = false
 	var current_choices = get_current_choices()
 	var selected_choice = current_choices[choice_index]
 	var next_scene_name = selected_choice["next_scene"]
 	current_scene_name = next_scene_name
 	current_dialog_index = 0
-
-func has_dialogue():
-	return get_current_scene()["dialogue"].size() > 0
+	run_dialogue()

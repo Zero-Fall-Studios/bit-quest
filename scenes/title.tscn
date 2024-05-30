@@ -156,7 +156,7 @@ text = "Press any key
 
 [node name="FadeInTitle" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_m52ow")
-blackboard = NodePath("@Node@17306")
+blackboard = NodePath("@Node@17300")
 actor = NodePath("..")
 
 [node name="SequenceStarComposite" type="Node" parent="FadeInTitle"]
@@ -194,7 +194,7 @@ behavior_tree = NodePath("../..")
 [node name="GotoGame" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("4_m52ow")
 enabled = false
-blackboard = NodePath("@Node@17307")
+blackboard = NodePath("@Node@17301")
 actor = NodePath("..")
 
 [node name="SequenceStarComposite" type="Node" parent="GotoGame"]
