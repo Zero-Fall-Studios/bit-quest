@@ -12,8 +12,7 @@ NPC: I can help you with anything you need.
 
 # Scene 3
 NPC: Please feel free to take a look.
-NPC: [action=open_shop]
--> Scene 1
+[action] open_shop
 
 # Scene 4
 NPC: I could use some help around the forge.

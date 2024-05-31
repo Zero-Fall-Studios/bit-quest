@@ -17,8 +17,8 @@
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_show.gd" id="13_cd6ai"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="14_8q42t"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/wait_for_interaction.gd" id="15_d2yu7"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/show_dialogue_action.gd" id="16_37wsk"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_hide.gd" id="16_bgii4"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/action/dialogue_action.gd" id="16_isci7"]
 
 [sub_resource type="Resource" id="Resource_ghxqv"]
 script = ExtResource("2_jheat")
@@ -113,7 +113,7 @@ script = ExtResource("9_ginu2")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_nrocr")
-blackboard = NodePath("@Node@17305")
+blackboard = NodePath("@Node@17311")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
@@ -132,9 +132,10 @@ offset = Vector2(0, -25)
 [node name="WaitForInterAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
 script = ExtResource("15_d2yu7")
 
-[node name="DialogueAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
-script = ExtResource("16_isci7")
-dialogue_interaction_path = "res://resources/dialogue_interaction.dsf"
+[node name="ShowDialogueAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
+script = ExtResource("16_37wsk")
+dialogue = "Hello There Fella. What do you want?"
+speaker = "InnKeeper"
 
 [node name="Idle" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("11_odkn4")

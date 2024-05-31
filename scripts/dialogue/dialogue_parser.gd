@@ -35,6 +35,13 @@ func parse_by_file_name(file_name: String) -> Array[Dictionary]:
 									current_entry["choices"] = []
 							current_entry["choices"].append({"text": choice_text, "next_scene": next_scene})
 			
+			elif line.begins_with("[action]"):
+					var action = line.lstrip("[action]").strip_edges()
+					if current_entry.size() > 0:
+							if not current_entry.has("actions"):
+									current_entry["actions"] = []
+							current_entry["actions"].append(action)
+
 			elif "->" in line:
 					var next_scene = line.lstrip("->").strip_edges()
 					if current_entry.size() > 0:

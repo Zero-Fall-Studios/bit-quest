@@ -31,8 +31,8 @@
     "dialogue": [
       {
         "speaker": "NPC",
-        "text": ["Please feel free to take a look.", "[action=open_shop]"],
-        "next_scene": "Scene 1"
+        "text": ["Please feel free to take a look."],
+        "actions": ["open_shop"]
       }
     ]
   },

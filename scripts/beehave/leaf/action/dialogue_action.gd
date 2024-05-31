@@ -4,7 +4,7 @@ class_name DialogueAction extends ActionLeaf
 
 func tick(actor: Node, _blackboard: Blackboard) -> int:
 
-	if not Dialogue.is_playing:
+	if not Dialogue.is_playing and not Dialogue.is_finished:
 		Dialogue.run(dialogue_interaction_path)
 		return RUNNING
 

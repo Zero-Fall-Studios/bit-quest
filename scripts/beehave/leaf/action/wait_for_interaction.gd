@@ -10,6 +10,7 @@ func tick(actor: Node, _blackboard: Blackboard) -> int:
 		return FAILURE
 	if waiting:
 		return RUNNING
+	waiting = true
 	return SUCCESS
 
 func _unhandled_input(_event: InputEvent) -> void:

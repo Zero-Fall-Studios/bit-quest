@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ein1ed3f8t70"]
+[gd_scene load_steps=19 format=3 uid="uid://ein1ed3f8t70"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_80m75"]
 [ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_5pju4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="6_wv7rl"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="7_dp3kx"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_1fj45"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="9_gxktw"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="9_mqi22"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="9_qdc7c"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/wander_action.gd" id="11_442vo"]
@@ -101,9 +102,12 @@ script = ExtResource("6_wv7rl")
 [node name="DieState" type="Node" parent="StateMachine"]
 script = ExtResource("7_dp3kx")
 
+[node name="TargetInRange" type="Node" parent="."]
+script = ExtResource("9_gxktw")
+
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("8_1fj45")
-blackboard = NodePath("@Node@17994")
+blackboard = NodePath("@Node@18727")
 actor = NodePath("..")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree"]

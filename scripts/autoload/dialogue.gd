@@ -45,31 +45,39 @@ func _unhandled_input(_event: InputEvent) -> void:
 			_on_choice_selected(choice_selected_index)
 
 func show_ui():
-	if not is_playing:
-		return
 	speaker_name.text = ""
 	speaker_text.text = ""
 	animation_player.play("fade_in")
 	await animation_player.animation_finished
 
+func hide_ui():
+	animation_player.play("fade_out")
+	await animation_player.animation_finished
+	choice_1.text = ""
+	choice_2.text = ""
+	choice_3.text = ""
+	speaker_name.text = ""
+	speaker_text.text = ""
+
 func show_dialogues(dialogues: Array) -> void:
-	if not is_playing:
-		return
+	is_playing = true
+	is_finished = false
+	await show_ui()
 	choice_1.text = ""
 	choice_2.text = ""
 	choice_3.text = ""
 	for dialogue in dialogues:
 		for text in dialogue["text"]:
-			if not is_playing:
-				return
 			speaker_name.text = dialogue["speaker"] + ":"
 			speaker_text.text = text
 			animation_player.play("speak")
 			await animation_player.animation_finished
+	await hide_ui()
+	print("show_dialogues finished")
+	is_playing = false
+	is_finished = true
 		
 func show_choices(choices: Array) -> void:
-	if not is_playing:
-		return
 	is_showing_choices = true
 	speaker_name.text = ""
 	speaker_text.text = ""
@@ -96,11 +104,21 @@ func run_choices():
 	if current_choices.size() > 0:
 		await show_choices(current_choices)
 
+func run_actions():
+	var current_actions = get_current_actions()
+	print("current_actions", current_actions)
+
 func run_dialogue():
 	var current_speaker = get_current_speaker()
 	var current_text = get_current_text()
 	await show_dialogues([{"text": current_text, "speaker": current_speaker, "duration": 1}])
 	await run_choices()
+	
+	var current_actions = get_current_actions()
+	if current_actions.size() > 0:
+		await run_actions()
+		stop()
+		return
 
 	var next_scene_name = get_next_scene_name()
 	if next_scene_name:
@@ -151,6 +169,11 @@ func get_current_choices():
 	if not get_current_dialogue().has("choices"):
 		return []
 	return get_current_dialogue()["choices"]
+
+func get_current_actions():
+	if not get_current_dialogue().has("actions"):
+		return []
+	return get_current_dialogue()["actions"]
 
 func _on_choice_selected(choice_index: int):
 	is_showing_choices = false
