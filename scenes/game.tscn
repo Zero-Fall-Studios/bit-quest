@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://3bg68s454lxs"]
+[gd_scene load_steps=12 format=3 uid="uid://3bg68s454lxs"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_j1to8"]
 [ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://examples/inventory.tres" id="2_0pner"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_rspcn"]
 [ext_resource type="PackedScene" uid="uid://b6slnj6s2yum6" path="res://scenes/environment/block.tscn" id="3_manry"]
-[ext_resource type="PackedScene" uid="uid://ein1ed3f8t70" path="res://scenes/characters/wandering_npc.tscn" id="5_dikyc"]
 [ext_resource type="PackedScene" uid="uid://kw8m1246r870" path="res://scenes/characters/idle_npc.tscn" id="5_hfcj3"]
 [ext_resource type="PackedScene" uid="uid://sol16ia6dkjb" path="res://scenes/environment/exit.tscn" id="7_sakmn"]
 [ext_resource type="PackedScene" uid="uid://d1hg7kvarydw5" path="res://scenes/coin.tscn" id="9_lxnt5"]
@@ -61,10 +60,6 @@ position = Vector2(240, 120)
 [node name="IdleNpcSpawn" type="Node2D" parent="."]
 position = Vector2(56, 112)
 
-[node name="WanderingNpc" parent="." node_paths=PackedStringArray("spawn_position") instance=ExtResource("5_dikyc")]
-position = Vector2(276, 40)
-spawn_position = NodePath("../NpcSpawn")
-
 [node name="IdleNpc" parent="." node_paths=PackedStringArray("spawn_position") instance=ExtResource("5_hfcj3")]
 position = Vector2(265, 132)
 spawn_position = NodePath("../IdleNpcSpawn")
@@ -98,6 +93,7 @@ position = Vector2(3.5, 90)
 shape = SubResource("RectangleShape2D_5ymx5")
 
 [node name="Coin" parent="." node_paths=PackedStringArray("audio") instance=ExtResource("9_lxnt5")]
+visible = true
 position = Vector2(104, 83)
 spawn_once_per_level = true
 audio = NodePath("AudioStreamPlayer2D")

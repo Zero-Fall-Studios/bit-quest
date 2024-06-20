@@ -21,9 +21,11 @@ BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 Globals="*res://scripts/autoload/globals.gd"
 PickupSignalBus="*res://scripts/autoload/pickup_signal_bus.gd"
 SceneManager="*res://scripts/autoload/scene_manager.tscn"
-Dialogue="*res://scripts/autoload/dialogue.tscn"
-DialogueParser="*res://scripts/dialogue/dialogue_parser.gd"
+Dialogue="*res://addons/dialogue/dialogue.tscn"
+DialogueParser="*res://addons/dialogue/dialogue_parser.gd"
 InteractionUi="*res://scenes/interactions/interaction_ui.tscn"
+Choices="*res://addons/dialogue/choices.tscn"
+DialogueScript="*res://addons/dialogue/dialogue_script.gd"
 
 [display]
 

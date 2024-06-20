@@ -1,0 +1,289 @@
+[gd_scene load_steps=10 format=3 uid="uid://3xxvv6er5c83"]
+
+[ext_resource type="Theme" uid="uid://bkbeh7sgw1fur" path="res://themes/default_theme.tres" id="1_0ugm5"]
+[ext_resource type="Script" path="res://addons/dialogue/choices.gd" id="1_ynvdp"]
+[ext_resource type="Texture2D" uid="uid://bx681x1qwqbg3" path="res://assets/images/RightArrow.png" id="2_olrl5"]
+
+[sub_resource type="Animation" id="Animation_nrlpd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Panel/ChoiceText:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Panel/ChoiceText2:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Panel/ChoiceText3:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Panel/RightArrowChoice:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cjfw4"]
+resource_name = "cursor"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel/RightArrowChoice:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6dlc8"]
+resource_name = "fade_in"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2331),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ncl78"]
+resource_name = "fade_out"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2331),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Panel/RightArrowChoice:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wjpjg"]
+resource_name = "show_choices"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel/ChoiceText:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2331),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Panel/ChoiceText2:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2331),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Panel/ChoiceText3:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2331),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fsvoj"]
+_data = {
+"RESET": SubResource("Animation_nrlpd"),
+"cursor": SubResource("Animation_cjfw4"),
+"fade_in": SubResource("Animation_6dlc8"),
+"fade_out": SubResource("Animation_ncl78"),
+"show_choices": SubResource("Animation_wjpjg")
+}
+
+[node name="Choices" type="Node2D" node_paths=PackedStringArray("choice_1", "choice_2", "choice_3", "right_arrow")]
+script = ExtResource("1_ynvdp")
+choice_1 = NodePath("CanvasLayer/Panel/ChoiceText")
+choice_2 = NodePath("CanvasLayer/Panel/ChoiceText2")
+choice_3 = NodePath("CanvasLayer/Panel/ChoiceText3")
+right_arrow = NodePath("CanvasLayer/Panel/RightArrowChoice")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fsvoj")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 46.0
+offset_right = -76.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RightArrowChoice" type="TextureRect" parent="CanvasLayer/Panel"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 10.0
+offset_right = 22.0
+offset_bottom = 26.0
+texture = ExtResource("2_olrl5")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ChoiceText" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -37.5
+offset_right = 59.0
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0ugm5")
+theme_override_constants/line_spacing = -7
+text = "The first choice is always the best because you can see it coming a mile away"
+autowrap_mode = 3
+justification_flags = 171
+text_overrun_behavior = 1
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ChoiceText2" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -11.5
+offset_right = 52.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0ugm5")
+theme_override_constants/line_spacing = -7
+text = "The first choice is always the best because you can see it coming a mile away
+"
+autowrap_mode = 3
+justification_flags = 171
+text_overrun_behavior = 1
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ChoiceText3" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 14.5
+offset_right = 52.0
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0ugm5")
+theme_override_constants/line_spacing = -7
+text = "The first choice is always the best because you can see it coming a mile away
+"
+autowrap_mode = 3
+justification_flags = 171
+text_overrun_behavior = 1
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+metadata/_edit_use_anchors_ = true
