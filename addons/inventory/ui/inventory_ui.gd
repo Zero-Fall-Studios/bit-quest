@@ -2,14 +2,13 @@
 extends Control
 class_name InventoryUI
 
-@export var save_game: SaveGame
 @export var inventory: Inventory
 @export var equipment: Equipment
-@export var slot : PackedScene
-@export var draggable_item_scene : PackedScene
+@export var slot: PackedScene
+@export var draggable_item_scene: PackedScene
 
-@onready var container : VBoxContainer = $Panel/VBoxContainer
-@onready var money_label : Label = $Panel/Label
+@onready var container: VBoxContainer = $Panel/VBoxContainer
+@onready var money_label: Label = $Panel/Label
 
 var inventory_grid: Vector2
 @export var grid: Vector2:
@@ -38,7 +37,7 @@ func _ready():
 #		save_game.inventory = inventory
 #		save_game.write_savegame()
 
-func _create_grid():	
+func _create_grid():
 	if not container:
 		return
 	for child in container.get_children():
@@ -57,7 +56,6 @@ func _create_grid():
 		container.add_child(row)
 
 func _on_inventory_change():
-	save_game.write_savegame()
 	call_deferred("_free_inventory")
 	
 func _free_inventory():
@@ -79,10 +77,7 @@ func _on_equipment_change():
 	print("_on_equipment_change")
 	
 func _on_money_change(money):
-	save_game.write_savegame()
 	_set_money_text(money)
 	
 func _set_money_text(money):
 	money_label.text = "Money: " + str(money)
-	
-

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemAtlas" load_steps=3 format=3 uid="uid://bc3cyyghmykbx"]
 
-[ext_resource type="Script" path="res://scripts/resources/item_atlas.gd" id="1_di630"]
+[ext_resource type="Script" path="res://addons/inventory/item_atlas.gd" id="1_di630"]
 [ext_resource type="Texture2D" uid="uid://dumxm3367q6bh" path="res://assets/images/WeaponsAndArmor.png" id="2_5aw10"]
 
 [resource]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://b04ii0ud80tpv"]
 
-[ext_resource type="Script" path="res://scenes/ui/slot/equipment_slot.gd" id="1_4t5dj"]
-[ext_resource type="Shader" path="res://scenes/ui/slot/slot_graphic.gdshader" id="2_78ant"]
+[ext_resource type="Script" path="res://addons/inventory/ui/slot/equipment_slot.gd" id="1_4t5dj"]
+[ext_resource type="Shader" path="res://addons/inventory/ui/slot/slot_graphic.gdshader" id="2_78ant"]
 [ext_resource type="Texture2D" uid="uid://cyubp5bn3ohhx" path="res://assets/images/InventorySlot.png" id="3_p7hhg"]
-[ext_resource type="Script" path="res://scenes/ui/slot/drop_zone.gd" id="4_dnr6e"]
+[ext_resource type="Script" path="res://addons/inventory/ui/slot/drop_zone.gd" id="4_dnr6e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_66a8i"]
 shader = ExtResource("2_78ant")

@@ -1,15 +1,43 @@
-[gd_scene load_steps=15 format=3 uid="uid://q28w184q466y"]
+[gd_scene load_steps=16 format=3 uid="uid://q28w184q466y"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_28fcs"]
-[ext_resource type="Resource" uid="uid://dkxv4iuilolxd" path="res://resources/player_stats.tres" id="2_fnjid"]
+[ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_easbv"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_pb85r"]
 [ext_resource type="Script" path="res://scripts/character/controls/player_controls.gd" id="3_nfwgp"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_kvt3s"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_kvt3s"]
 [ext_resource type="Script" path="res://scripts/character/player/states/idle_state.gd" id="5_071iq"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_tw0xa"]
 [ext_resource type="Script" path="res://scripts/character/player/states/walk_state.gd" id="6_whvp4"]
 [ext_resource type="Script" path="res://scripts/character/player/states/run_state.gd" id="7_cgfo6"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="10_plokr"]
+
+[sub_resource type="Resource" id="Resource_i16wm"]
+script = ExtResource("2_easbv")
+race = 3
+class_type = 4
+alignment = 1
+level = 1
+hp = 1
+mp = 1
+xp = 0
+strength = 1
+dexterity = 1
+constitution = 1
+intelligence = 1
+wisdom = 1
+charisma = 1
+attack = 1
+start_level = 1
+start_hp = 1
+start_mp = 1
+start_xp = 0
+start_strength = 1
+start_dexterity = 1
+start_constitution = 1
+start_intelligence = 1
+start_wisdom = 1
+start_charisma = 1
+start_attack = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3syqg"]
 size = Vector2(8, 8)
@@ -53,7 +81,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_28fcs")
-character_stats = ExtResource("2_fnjid")
+character_sheet = SubResource("Resource_i16wm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3syqg")

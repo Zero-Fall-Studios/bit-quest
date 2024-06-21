@@ -4,19 +4,18 @@ Innkeeper: What brings you to these parts?
 Innkeeper: Sunny day, isn't it?
 - What is this place? -> Scene 2
 - Let me look at your wares. -> Scene 3
-- I'm looking for a job. -> Scene 4
+- Steal apple to eat. -> Scene 4
   
 # Scene 2
 Innkeeper: This is the town of Riverwood. I'm the blacksmith here.
 Innkeeper: I can help you with anything you need.
--> Scene 1
+[action] return_to_choices
 
 # Scene 3
 Innkeeper: Please feel free to take a look.
 [action] open_shop
 
 # Scene 4
-Innkeeper: I could use some help around the forge.
-Innkeeper: I'll pay you for your time.
-[action] return_to_choices
+Innkeeper: What? Why would you steal my apples? Police! Come quick!
+[action] alignment_evil
 

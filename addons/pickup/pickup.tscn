@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bacc0kqeepab1"]
 
-[ext_resource type="Script" path="res://scenes/pickup.gd" id="1_4fw43"]
-[ext_resource type="Resource" uid="uid://bc3cyyghmykbx" path="res://examples/item_atlases/weapons_armor.tres" id="2_3toir"]
+[ext_resource type="Script" path="res://addons/pickup/pickup.gd" id="1_4fw43"]
+[ext_resource type="Resource" uid="uid://bc3cyyghmykbx" path="res://addons/inventory/examples/item_atlases/weapons_armor.tres" id="2_3toir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0vd"]
 size = Vector2(16, 16)

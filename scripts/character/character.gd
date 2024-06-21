@@ -1,5 +1,3 @@
-@tool
-
 class_name Character extends CharacterBody2D
 
 @export_group("Movement Physics")
@@ -7,8 +5,8 @@ class_name Character extends CharacterBody2D
 @export var acceleration: float = 50.0
 @export var friction: float = 70.0
 
-@export_group("Stats")
-@export var character_stats: CharacterStats
+@export_group("Character Sheet")
+@export var character_sheet: CharacterSheet = CharacterSheet.new()
 
 @export_group("Spawning")
 @export var spawn_position: Node2D
@@ -26,33 +24,33 @@ var target
 var targets = []
 var is_alive: bool = false
 var is_paralyzed: bool = false
+var aggro: bool = false
 
 func _ready():
-	if Engine.is_editor_hint():
-		return
 	hide()
 	is_alive = false
 	is_paralyzed = true
 	if state_machine:
 		state_machine.init(self)
 
-func _unhandled_input(event):
-	if Engine.is_editor_hint():
+	DialogueScript.action_completed.connect(_on_action_completed)
+
+func _on_action_completed(_choice_index, action_name):
+	if action_name == "alignment_evil":
+		character_sheet.alignment = CharacterSheet.CharacterAlignment.Evil
 		return
+
+func _unhandled_input(event):
 	if is_paralyzed:
 		return
 	if state_machine:
 		state_machine.process_input(event)
 
 func _physics_process(delta):
-	if Engine.is_editor_hint():
-		return
 	if state_machine:
 		state_machine.process_physics(delta)
 
 func _process(delta):
-	if Engine.is_editor_hint():
-		return
 	if state_machine:
 		state_machine.process_frame(delta)
 
@@ -71,7 +69,7 @@ func freeze():
 	velocity = Vector2.ZERO
 
 func spawn(pos: Vector2):
-	character_stats.reset()
+	character_sheet.reset()
 	velocity = Vector2.ZERO
 	position = pos
 	is_alive = true
@@ -86,12 +84,12 @@ func die():
 	on_die.emit(self, position)
 
 func take_damage(damage: int):
-	character_stats.hp -= damage
-	if character_stats.hp <= 0:
+	character_sheet.hp -= damage
+	if character_sheet.hp <= 0:
 		die()
 
 func take_damage_from_node(actor):
-	take_damage(actor.character_stats.attack)
+	take_damage(actor.character_sheet.attack)
 
 func handle_collisions_from_slide():
 	var collision = get_last_slide_collision()

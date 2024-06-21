@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=3 uid="uid://kw8m1246r870"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_gvyob"]
-[ext_resource type="Script" path="res://scripts/character/behaviors/character_stats.gd" id="2_jheat"]
+[ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_wjhif"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_in5ys"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_5jwas"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="5_0ptf6"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="5_0ptf6"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_idvil"]
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_xsp0f"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_u6qie"]
@@ -20,18 +20,33 @@
 [ext_resource type="Script" path="res://addons/dialogue/dialogue_script_action.gd" id="16_8jppy"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_hide.gd" id="16_bgii4"]
 
-[sub_resource type="Resource" id="Resource_ghxqv"]
-script = ExtResource("2_jheat")
-hp = 100
-mp = 100
-xp = 1
+[sub_resource type="Resource" id="Resource_rfns4"]
+script = ExtResource("2_wjhif")
+race = 3
+class_type = 4
+alignment = 1
+level = 1
+hp = 1
+mp = 1
+xp = 0
+strength = 1
+dexterity = 1
+constitution = 1
+intelligence = 1
+wisdom = 1
+charisma = 1
 attack = 1
-defense = 0
-starting_hp = 100
-starting_mp = 100
-starting_xp = 0
-starting_attack = 1
-starting_defense = 0
+start_level = 1
+start_hp = 1
+start_mp = 1
+start_xp = 0
+start_strength = 1
+start_dexterity = 1
+start_constitution = 1
+start_intelligence = 1
+start_wisdom = 1
+start_charisma = 1
+start_attack = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlag5"]
 size = Vector2(8, 8)
@@ -75,7 +90,7 @@ _data = {
 
 [node name="IdleNpc" type="CharacterBody2D"]
 script = ExtResource("1_gvyob")
-character_stats = SubResource("Resource_ghxqv")
+character_sheet = SubResource("Resource_rfns4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tlag5")
@@ -113,7 +128,7 @@ script = ExtResource("9_ginu2")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_nrocr")
-blackboard = NodePath("@Node@19314")
+blackboard = NodePath("@Node@17290")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
@@ -127,6 +142,7 @@ script = ExtResource("12_5y0d6")
 
 [node name="InteractionUIShowAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
 script = ExtResource("13_cd6ai")
+message = "Press F to talk"
 offset = Vector2(0, -25)
 
 [node name="WaitForInterAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]

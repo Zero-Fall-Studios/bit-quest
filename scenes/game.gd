@@ -105,7 +105,7 @@ func _on_player_die(c, _pos):
   # print("Player died", c.name, pos)
 	c.state_machine.reset()
 
-func _on_exit_entered(body: Node2D):
+func _on_exit_entered(_body: Node2D):
 	get_tree().reload_current_scene()
 
 func _on_money_change(money):

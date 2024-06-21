@@ -1,32 +1,31 @@
-[gd_scene load_steps=28 format=3 uid="uid://bowvn7cgfqwon"]
+[gd_scene load_steps=28 format=3 uid="uid://37c0ton1fh68"]
 
-[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_rik0r"]
-[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_2ftae"]
-[ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_x86pc"]
-[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_64b3s"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_bnme5"]
-[ext_resource type="Script" path="res://scripts/character/behaviors/aggro.gd" id="5_op6mf"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="6_8dx1c"]
-[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_ucqk2"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="7_254hl"]
-[ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_bucr7"]
-[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="7_k0gp0"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="8_yln3g"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/has_target_condition.gd" id="9_vvlhr"]
-[ext_resource type="AudioStream" uid="uid://bdjg07ofo0b56" path="res://assets/audio/Bass Rev.wav" id="10_0bgmu"]
-[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="10_ipps0"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/action/follow_action.gd" id="11_1njw6"]
-[ext_resource type="AudioStream" uid="uid://bqm3irdntk4v3" path="res://assets/audio/Bass Rev Rev.wav" id="11_vnqes"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="12_mf1fh"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="13_e0upd"]
-[ext_resource type="Script" path="res://scripts/beehave/leaf/action/wander_action.gd" id="14_yjrbt"]
+[ext_resource type="Script" path="res://scripts/character/character.gd" id="1_ik32e"]
+[ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_cx8np"]
+[ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_v4avw"]
+[ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_sqya2"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="5_3q3pq"]
+[ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_uba3b"]
+[ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_o2swr"]
+[ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_3ryi8"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/aggro.gd" id="9_j6a31"]
+[ext_resource type="Script" path="res://scripts/character/behaviors/target_in_range.gd" id="9_tp0ec"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="10_0xu24"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="11_o68ys"]
+[ext_resource type="AudioStream" uid="uid://bdjg07ofo0b56" path="res://assets/audio/Bass Rev.wav" id="11_xqpgb"]
+[ext_resource type="AudioStream" uid="uid://bqm3irdntk4v3" path="res://assets/audio/Bass Rev Rev.wav" id="12_umcar"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/idle_action.gd" id="12_y475n"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/wander_action.gd" id="13_eert5"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="14_xa5ob"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/condition/has_aggro_condition.gd" id="16_d4rd1"]
+[ext_resource type="Script" path="res://scripts/beehave/leaf/action/follow_action.gd" id="17_r2hfd"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="18_rbq4d"]
 
 [sub_resource type="Resource" id="Resource_tvth3"]
-script = ExtResource("2_x86pc")
+script = ExtResource("2_cx8np")
 race = 3
 class_type = 4
 alignment = 1
-alignment_type = 1
 level = 1
 hp = 1
 mp = 1
@@ -157,8 +156,8 @@ _data = {
 "Spawn": SubResource("Animation_4c43c")
 }
 
-[node name="WanderingEnemy" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_rik0r")
+[node name="PoliceNPC" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_ik32e")
 character_sheet = SubResource("Resource_tvth3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -166,7 +165,7 @@ shape = SubResource("RectangleShape2D_tlag5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_2ftae")
+texture = ExtResource("3_v4avw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -174,71 +173,72 @@ libraries = {
 }
 
 [node name="Controls" type="Node" parent="."]
-script = ExtResource("3_64b3s")
+script = ExtResource("4_sqya2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_bnme5")
+script = ExtResource("5_3q3pq")
 initial_state = NodePath("SpawnState")
 
 [node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
-script = ExtResource("6_ucqk2")
+script = ExtResource("6_uba3b")
 next_state = NodePath("../AliveState")
 animation = "Spawn"
 
 [node name="AliveState" type="Node" parent="StateMachine"]
-script = ExtResource("7_bucr7")
+script = ExtResource("7_o2swr")
 
 [node name="DieState" type="Node" parent="StateMachine"]
-script = ExtResource("7_k0gp0")
+script = ExtResource("8_3ryi8")
 
 [node name="Aggro" type="Node" parent="." node_paths=PackedStringArray("target_in_range", "audio_on_aggro")]
-script = ExtResource("5_op6mf")
+script = ExtResource("9_j6a31")
 target_in_range = NodePath("../TargetInRange")
 animation_on_aggro = "Enrage"
 animation_on_deaggro = "Derage"
 audio_on_aggro = NodePath("../EnrageAudio")
+alignment = 2
 
 [node name="TargetInRange" type="Node" parent="."]
-script = ExtResource("10_ipps0")
+script = ExtResource("9_tp0ec")
 distance = 100
 
 [node name="EnrageAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_0bgmu")
+stream = ExtResource("11_xqpgb")
 
 [node name="DerageAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_vnqes")
+stream = ExtResource("12_umcar")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
-script = ExtResource("6_8dx1c")
+script = ExtResource("10_0xu24")
 blackboard = NodePath("@Node@17292")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
-script = ExtResource("7_254hl")
+script = ExtResource("14_xa5ob")
 
 [node name="Follow" type="Node" parent="BeehaveTree/SelectorComposite"]
-script = ExtResource("8_yln3g")
+script = ExtResource("11_o68ys")
 
-[node name="HasTargetCondition" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
-script = ExtResource("9_vvlhr")
+[node name="HasAggroCondition" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
+script = ExtResource("16_d4rd1")
 
 [node name="FollowAction" type="Node" parent="BeehaveTree/SelectorComposite/Follow"]
-script = ExtResource("11_1njw6")
+script = ExtResource("17_r2hfd")
 wait_time = 5.0
 
 [node name="Wander" type="Node" parent="BeehaveTree/SelectorComposite"]
-script = ExtResource("8_yln3g")
+script = ExtResource("11_o68ys")
 
-[node name="NotHasTarget" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
-script = ExtResource("12_mf1fh")
+[node name="NotHasAggro" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
+script = ExtResource("18_rbq4d")
 
-[node name="HasTargetCondition" type="Node" parent="BeehaveTree/SelectorComposite/Wander/NotHasTarget"]
-script = ExtResource("9_vvlhr")
+[node name="HasAggroCondition" type="Node" parent="BeehaveTree/SelectorComposite/Wander/NotHasAggro"]
+script = ExtResource("16_d4rd1")
 
 [node name="IdleAction" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
-script = ExtResource("13_e0upd")
+script = ExtResource("12_y475n")
 
 [node name="WanderAction" type="Node" parent="BeehaveTree/SelectorComposite/Wander"]
-script = ExtResource("14_yjrbt")
+script = ExtResource("13_eert5")
 wander_speed = 50.0
 wait_time = 5.0

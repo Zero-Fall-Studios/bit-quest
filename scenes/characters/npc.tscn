@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_cek5b"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_imlqm"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="3_xe7i2"]
-[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_1x6h8"]
+[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_1x6h8"]
 [ext_resource type="Script" path="res://scripts/character/npc/states/npc_idle_state.gd" id="5_03ww3"]
 [ext_resource type="Script" path="res://scripts/character/npc/states/wander_state.gd" id="5_s3gwa"]
 [ext_resource type="Script" path="res://scripts/character/npc/states/follow_state.gd" id="6_eayad"]

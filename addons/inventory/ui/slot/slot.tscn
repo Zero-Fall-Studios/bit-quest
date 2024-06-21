@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8w0ac0cn7b3h"]
 
-[ext_resource type="Script" path="res://scenes/ui/slot/slot.gd" id="1_x1xja"]
+[ext_resource type="Script" path="res://addons/inventory/ui/slot/slot.gd" id="1_x1xja"]
 [ext_resource type="Texture2D" uid="uid://cyubp5bn3ohhx" path="res://assets/images/InventorySlot.png" id="2_sssll"]
-[ext_resource type="Script" path="res://scenes/ui/slot/drop_zone.gd" id="3_o6wpf"]
+[ext_resource type="Script" path="res://addons/inventory/ui/slot/drop_zone.gd" id="3_o6wpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tsk6"]
 size = Vector2(16, 16)

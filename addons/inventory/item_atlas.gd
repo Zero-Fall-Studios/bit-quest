@@ -3,7 +3,7 @@ extends Resource
 class_name ItemAtlas
 
 @export var texture: Texture
-@export var json_src: String
+@export_file("*.json") var json_src
 @export var interval: int = 16
 @export var width: int = 1
 @export var height: int = 1
@@ -87,4 +87,3 @@ static func get_coords(index: int, increment: int, w: int, h: int) -> Vector2:
 	var x = col * increment
 	var y = row * increment
 	return Vector2(x, y)
-	

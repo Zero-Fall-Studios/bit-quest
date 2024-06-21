@@ -11,8 +11,10 @@ class_name Aggro extends Node
 @export var audio_on_aggro: AudioStreamPlayer2D
 @export var audio_on_deaggro: AudioStreamPlayer2D
 
+@export_group("Aggro Conditions")
+@export var alignment: CharacterSheet.CharacterAlignment = CharacterSheet.CharacterAlignment.Neutral
+
 var parent: Character
-var has_aggro: bool = false
 
 signal aggro()
 signal deaggro()
@@ -22,9 +24,12 @@ func _ready():
 	target_in_range.in_range.connect(_on_in_range)
 	target_in_range.out_of_range.connect(_on_out_of_range)
 
-func _on_in_range(_node: Node2D):
-	if not has_aggro:
-		has_aggro = true
+func _on_in_range(target):
+	if target.character_sheet.alignment != alignment:
+		return
+
+	if not parent.aggro:
+		parent.aggro = true
 		if animation_on_aggro:
 			parent.animation_player.play(animation_on_aggro)
 		if audio_on_aggro:
@@ -32,8 +37,8 @@ func _on_in_range(_node: Node2D):
 		aggro.emit()
 
 func _on_out_of_range():
-	if has_aggro:
-		has_aggro = false
+	if parent.aggro:
+		parent.aggro = false
 		if animation_on_deaggro:
 			parent.animation_player.play(animation_on_deaggro)
 		if audio_on_deaggro:

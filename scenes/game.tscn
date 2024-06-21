@@ -1,12 +1,71 @@
-[gd_scene load_steps=12 format=3 uid="uid://3bg68s454lxs"]
+[gd_scene load_steps=17 format=3 uid="uid://3bg68s454lxs"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_j1to8"]
-[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://examples/inventory.tres" id="2_0pner"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://addons/inventory/examples/inventory.tres" id="2_0pner"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_rspcn"]
 [ext_resource type="PackedScene" uid="uid://b6slnj6s2yum6" path="res://scenes/environment/block.tscn" id="3_manry"]
+[ext_resource type="PackedScene" uid="uid://ein1ed3f8t70" path="res://scenes/characters/wandering_npc.tscn" id="5_d2j55"]
 [ext_resource type="PackedScene" uid="uid://kw8m1246r870" path="res://scenes/characters/idle_npc.tscn" id="5_hfcj3"]
+[ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="6_jotgj"]
 [ext_resource type="PackedScene" uid="uid://sol16ia6dkjb" path="res://scenes/environment/exit.tscn" id="7_sakmn"]
-[ext_resource type="PackedScene" uid="uid://d1hg7kvarydw5" path="res://scenes/coin.tscn" id="9_lxnt5"]
+[ext_resource type="PackedScene" uid="uid://37c0ton1fh68" path="res://scenes/characters/police_npc.tscn" id="8_4mq2t"]
+[ext_resource type="PackedScene" uid="uid://d1hg7kvarydw5" path="res://scenes/items/coin.tscn" id="9_lxnt5"]
+
+[sub_resource type="Resource" id="Resource_vwg16"]
+script = ExtResource("6_jotgj")
+race = 3
+class_type = 4
+alignment = 1
+level = 1
+hp = 1
+mp = 1
+xp = 0
+strength = 1
+dexterity = 1
+constitution = 1
+intelligence = 1
+wisdom = 1
+charisma = 1
+attack = 1
+start_level = 1
+start_hp = 1
+start_mp = 1
+start_xp = 0
+start_strength = 1
+start_dexterity = 1
+start_constitution = 1
+start_intelligence = 1
+start_wisdom = 1
+start_charisma = 1
+start_attack = 1
+
+[sub_resource type="Resource" id="Resource_sk0n6"]
+script = ExtResource("6_jotgj")
+race = 3
+class_type = 4
+alignment = 1
+level = 1
+hp = 1
+mp = 1
+xp = 0
+strength = 1
+dexterity = 1
+constitution = 1
+intelligence = 1
+wisdom = 1
+charisma = 1
+attack = 1
+start_level = 1
+start_hp = 1
+start_mp = 1
+start_xp = 0
+start_strength = 1
+start_dexterity = 1
+start_constitution = 1
+start_intelligence = 1
+start_wisdom = 1
+start_charisma = 1
+start_attack = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgo32"]
 size = Vector2(353, 5)
@@ -57,12 +116,24 @@ texture = ExtResource("2_rspcn")
 [node name="NpcSpawn" type="Node2D" parent="."]
 position = Vector2(240, 120)
 
+[node name="NpcSpawn2" type="Node2D" parent="."]
+position = Vector2(226, 61)
+
 [node name="IdleNpcSpawn" type="Node2D" parent="."]
 position = Vector2(56, 112)
 
+[node name="WanderingNpc" parent="." node_paths=PackedStringArray("spawn_position") instance=ExtResource("5_d2j55")]
+position = Vector2(191, 132)
+character_sheet = SubResource("Resource_vwg16")
+spawn_position = NodePath("../NpcSpawn")
+
 [node name="IdleNpc" parent="." node_paths=PackedStringArray("spawn_position") instance=ExtResource("5_hfcj3")]
 position = Vector2(265, 132)
+character_sheet = SubResource("Resource_sk0n6")
 spawn_position = NodePath("../IdleNpcSpawn")
+
+[node name="PoliceNPC" parent="." node_paths=PackedStringArray("spawn_position") instance=ExtResource("8_4mq2t")]
+spawn_position = NodePath("../NpcSpawn2")
 
 [node name="ExitTop" parent="." instance=ExtResource("7_sakmn")]
 position = Vector2(0, -14)
@@ -92,8 +163,6 @@ position = Vector2(-17, 0)
 position = Vector2(3.5, 90)
 shape = SubResource("RectangleShape2D_5ymx5")
 
-[node name="Coin" parent="." node_paths=PackedStringArray("audio") instance=ExtResource("9_lxnt5")]
-visible = true
+[node name="Coin" parent="." instance=ExtResource("9_lxnt5")]
 position = Vector2(104, 83)
 spawn_once_per_level = true
-audio = NodePath("AudioStreamPlayer2D")

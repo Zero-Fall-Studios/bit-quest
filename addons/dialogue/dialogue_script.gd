@@ -5,8 +5,11 @@ var current_scene_index = 0
 var current_dialogue_index = 0
 var previous_scene_index = 0
 var previous_dialogue_index = 0
+var current_choice_index = 0
 
 var dialogues
+
+signal action_completed(choice_index, action_name)
 
 func _ready() -> void:
 	Dialogue.complete.connect(_on_dialogue_complete)
@@ -75,12 +78,16 @@ func _on_dialogue_complete():
 				current_dialogue_index = 0
 				_on_dialogue_complete()
 				return
-
+			if action == "alignment_evil":
+				action_completed.emit(current_choice_index, "alignment_evil")
+				return
 	stop()
 
-func _on_choices_finished(current_choice_index: int):
+func _on_choices_finished(choice_index: int):
 	if not is_running:
 		return
+
+	current_choice_index = choice_index
 
 	var current_scene = dialogues[current_scene_index]
 	var current_dialogues = current_scene["dialogue"]

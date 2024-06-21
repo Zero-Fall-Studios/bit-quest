@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://sol16ia6dkjb"]
 
-[ext_resource type="Script" path="res://scripts/environment/exit.gd" id="1_onyoh"]
+[ext_resource type="Script" path="res://scenes/environment/exit.gd" id="1_onyoh"]
 
 [node name="Exit" type="Area2D" groups=["exit"]]
 script = ExtResource("1_onyoh")

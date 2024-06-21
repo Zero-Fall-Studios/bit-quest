@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=2 format=3 uid="uid://5ty56lylab6q"]
 
-[ext_resource type="Script" path="res://scripts/resources/inventory.gd" id="1_s4hws"]
+[ext_resource type="Script" path="res://addons/inventory/inventory.gd" id="1_hhuhh"]
 
 [resource]
-script = ExtResource("1_s4hws")
+script = ExtResource("1_hhuhh")
 money = 0
 max_slots = 50
