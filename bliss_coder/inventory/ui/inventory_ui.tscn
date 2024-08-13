@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1wkt4sx0qqp0"]
 
-[ext_resource type="Script" path="res://addons/inventory/ui/inventory_ui.gd" id="1_h5fyq"]
-[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://addons/inventory/examples/inventory.tres" id="2_aqro3"]
-[ext_resource type="Resource" uid="uid://cfc4rj3eghbjo" path="res://addons/inventory/examples/equipment.tres" id="3_plqht"]
-[ext_resource type="PackedScene" uid="uid://c8w0ac0cn7b3h" path="res://addons/inventory/ui/slot/slot.tscn" id="4_lf23g"]
-[ext_resource type="PackedScene" uid="uid://c7x3udkbl8yvm" path="res://addons/inventory/ui/draggable/draggable_item.tscn" id="7_0g75k"]
-[ext_resource type="PackedScene" uid="uid://b04ii0ud80tpv" path="res://addons/inventory/ui/slot/equipment_slot.tscn" id="7_gfkhm"]
+[ext_resource type="Script" path="res://bliss_coder/inventory/ui/inventory_ui.gd" id="1_h5fyq"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://bliss_coder/inventory/examples/inventory.tres" id="2_aqro3"]
+[ext_resource type="Resource" uid="uid://cfc4rj3eghbjo" path="res://bliss_coder/inventory/examples/equipment.tres" id="3_plqht"]
+[ext_resource type="PackedScene" uid="uid://c8w0ac0cn7b3h" path="res://bliss_coder/inventory/ui/slot/slot.tscn" id="4_lf23g"]
+[ext_resource type="PackedScene" uid="uid://c7x3udkbl8yvm" path="res://bliss_coder/inventory/ui/draggable/draggable_item.tscn" id="7_0g75k"]
+[ext_resource type="PackedScene" uid="uid://b04ii0ud80tpv" path="res://bliss_coder/inventory/ui/slot/equipment_slot.tscn" id="7_gfkhm"]
 
 [node name="InventoryUI" type="Control"]
 layout_mode = 3

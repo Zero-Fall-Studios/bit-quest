@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://briwi8uruvil5"]
 
-[ext_resource type="PackedScene" uid="uid://b1wkt4sx0qqp0" path="res://addons/inventory/ui/inventory_ui.tscn" id="1_i4d7g"]
+[ext_resource type="PackedScene" uid="uid://b1wkt4sx0qqp0" path="res://bliss_coder/inventory/ui/inventory_ui.tscn" id="1_i4d7g"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_m2dbq"]
 [ext_resource type="PackedScene" uid="uid://bacc0kqeepab1" path="res://addons/pickup/pickup.tscn" id="2_liugc"]
-[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://addons/inventory/examples/item_atlases/money.tres" id="4_qb3b3"]
+[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://bliss_coder/inventory/examples/item_atlases/money.tres" id="4_qb3b3"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_m2dbq")

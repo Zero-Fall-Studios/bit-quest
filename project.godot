@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="LearningGodot"
+config/name="BitQuest"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
@@ -21,11 +21,12 @@ BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 Globals="*res://scripts/autoload/globals.gd"
 PickupSignalBus="*res://scripts/autoload/pickup_signal_bus.gd"
 SceneManager="*res://scripts/autoload/scene_manager.tscn"
-Dialogue="*res://addons/dialogue/dialogue.tscn"
-DialogueParser="*res://addons/dialogue/dialogue_parser.gd"
+Dialogue="*res://bliss_coder/dialogue/dialogue.tscn"
+DialogueParser="*res://bliss_coder/dialogue/dialogue_parser.gd"
 InteractionUi="*res://scenes/interactions/interaction_ui.tscn"
-Choices="*res://addons/dialogue/choices.tscn"
-DialogueScript="*res://addons/dialogue/dialogue_script.gd"
+Choices="*res://bliss_coder/dialogue/choices.tscn"
+DialogueScript="*res://bliss_coder/dialogue/dialogue_script.gd"
+Actions="*res://bliss_coder/actions/actions.tscn"
 
 [display]
 
@@ -80,6 +81,12 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="NPC"
+2d_physics/layer_3="Pickups"
 
 [rendering]
 

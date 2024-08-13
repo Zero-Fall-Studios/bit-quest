@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7jt4x4bt7uuv"]
+
+[ext_resource type="Script" path="res://bliss_coder/actions/actions.gd" id="1_g1x2h"]
+
+[node name="Actions" type="Node2D" node_paths=PackedStringArray("alignment_timer")]
+script = ExtResource("1_g1x2h")
+alignment_timer = NodePath("AlignmentTimer")
+
+[node name="AlignmentTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="AlignmentTimer" to="." method="_on_alignment_timer_timeout"]

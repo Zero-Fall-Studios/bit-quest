@@ -9,7 +9,7 @@ var current_choice_index = 0
 
 var dialogues
 
-signal action_completed(choice_index, action_name)
+signal action_completed(action_name)
 
 func _ready() -> void:
 	Dialogue.complete.connect(_on_dialogue_complete)
@@ -78,9 +78,8 @@ func _on_dialogue_complete():
 				current_dialogue_index = 0
 				_on_dialogue_complete()
 				return
-			if action == "alignment_evil":
-				action_completed.emit(current_choice_index, "alignment_evil")
-				return
+			action_completed.emit(action)
+			return
 	stop()
 
 func _on_choices_finished(choice_index: int):

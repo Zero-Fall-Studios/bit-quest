@@ -1,21 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://q28w184q466y"]
+[gd_scene load_steps=18 format=3 uid="uid://q28w184q466y"]
 
 [ext_resource type="Script" path="res://scripts/character/character.gd" id="1_28fcs"]
 [ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_easbv"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_pb85r"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://bliss_coder/inventory/examples/inventory.tres" id="3_60mje"]
 [ext_resource type="Script" path="res://scripts/character/controls/player_controls.gd" id="3_nfwgp"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_kvt3s"]
 [ext_resource type="Script" path="res://scripts/character/player/states/idle_state.gd" id="5_071iq"]
+[ext_resource type="Script" path="res://bliss_coder/state_machine/state_machine.gd" id="5_wsqne"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_tw0xa"]
 [ext_resource type="Script" path="res://scripts/character/player/states/walk_state.gd" id="6_whvp4"]
 [ext_resource type="Script" path="res://scripts/character/player/states/run_state.gd" id="7_cgfo6"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="10_plokr"]
+[ext_resource type="PackedScene" uid="uid://c37f3qdvli5sr" path="res://scenes/ui/alignment.tscn" id="11_cgdsp"]
 
 [sub_resource type="Resource" id="Resource_i16wm"]
 script = ExtResource("2_easbv")
 race = 3
 class_type = 4
-alignment = 1
+alignment = 0.0
 level = 1
 hp = 1
 mp = 1
@@ -80,8 +82,10 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 7
 script = ExtResource("1_28fcs")
 character_sheet = SubResource("Resource_i16wm")
+inventory = ExtResource("3_60mje")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3syqg")
@@ -101,7 +105,7 @@ libraries = {
 script = ExtResource("3_nfwgp")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("4_kvt3s")
+script = ExtResource("5_wsqne")
 initial_state = NodePath("SpawnState")
 
 [node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
@@ -122,3 +126,6 @@ run_speed = 200.0
 
 [node name="DieState" type="Node" parent="StateMachine"]
 script = ExtResource("10_plokr")
+
+[node name="Alignment" parent="." instance=ExtResource("11_cgdsp")]
+position = Vector2(-4, -10)

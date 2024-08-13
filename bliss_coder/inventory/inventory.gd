@@ -14,11 +14,6 @@ func _init():
 	items.resize(max_slots)
 	items.fill(null)
 
-	PickupSignalBus.pickup_event.connect(_on_pickup_event)
-
-func _on_pickup_event(_coords: Vector2, new_items: Array[Item]):
-	add(_coords, new_items)
-	
 func get_size():
 	return items.size()
 	
@@ -26,7 +21,16 @@ func add(coords: Vector2, new_items: Array[Item]):
 	for item in new_items:
 		
 		var _item = item.duplicate()
-		
+
+		if in_inventory(_item) and _item.is_unique:
+			print("Item is unique")
+			continue
+
+		if in_inventory(_item) and _item.is_stackable and _item.quantity < _item.max_stackable_count:
+			print("Add quantity")
+			add_quantity(_item, _item.quantity)
+			continue
+
 		if _item is Equipable:
 			var equipable = _item as Equipable
 			if equipable.equip_on_pickup:
@@ -42,20 +46,7 @@ func add(coords: Vector2, new_items: Array[Item]):
 			money = money + m.amount
 			money_change.emit(money)
 			continue
-			
-		# Duplicate the resource to make a brand new instance to put into inventory
-		# The bad side of this will make the in_inventory function not work
-		# since its checking the actual object and not some id
-		
-		if in_inventory(_item) and _item.is_unique:
-			print("Item is unique")
-			return
-			
-		if in_inventory(_item) and _item.is_stackable and _item.quantity < _item.max_stackable_count:
-			print("Add quantity")
-			add_quantity(_item, _item.quantity)
-			return
-
+						
 		var next_slot = get_next_available_slot()
 		if next_slot >= 0:
 			set_slot(next_slot, _item)
@@ -77,6 +68,10 @@ func in_inventory(item: Item):
 	var index = items.find(func(i): return i.id == item.id)
 	return index != - 1
 	
+func has_item(item: Item):
+	var index = items.find(func(i): return i.id == item.id)
+	return index != - 1
+
 func get_slot(slot_index) -> Item:
 	return items[slot_index]
 	

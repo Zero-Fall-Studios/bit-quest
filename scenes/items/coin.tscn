@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d1hg7kvarydw5"]
 
 [ext_resource type="Script" path="res://addons/pickup/pickup.gd" id="1_5ek2p"]
-[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://addons/inventory/examples/item_atlases/money.tres" id="2_damvo"]
+[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://bliss_coder/inventory/examples/item_atlases/money.tres" id="2_damvo"]
 [ext_resource type="Texture2D" uid="uid://cl7oy6iyjl841" path="res://assets/images/Coin.png" id="3_wa0tv"]
 [ext_resource type="AudioStream" uid="uid://b5n72er11hqr7" path="res://assets/audio/PickupItem3.wav" id="4_q81p3"]
 
@@ -47,9 +47,11 @@ _data = {
 }
 
 [node name="Coin" type="Area2D" node_paths=PackedStringArray("audio")]
+collision_layer = 4
 script = ExtResource("1_5ek2p")
 item_atlas = ExtResource("2_damvo")
 autospawn = true
+respawn_time = 1.0
 set_pickup_texture_from_atlas = false
 audio = NodePath("AudioStreamPlayer2D")
 

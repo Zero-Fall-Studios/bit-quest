@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://3xxvv6er5c83"]
 
 [ext_resource type="Theme" uid="uid://bkbeh7sgw1fur" path="res://themes/default_theme.tres" id="1_0ugm5"]
-[ext_resource type="Script" path="res://addons/dialogue/choices.gd" id="1_ynvdp"]
+[ext_resource type="Script" path="res://bliss_coder/dialogue/choices.gd" id="1_ynvdp"]
 [ext_resource type="Texture2D" uid="uid://bx681x1qwqbg3" path="res://assets/images/RightArrow.png" id="2_olrl5"]
 
 [sub_resource type="Animation" id="Animation_nrlpd"]

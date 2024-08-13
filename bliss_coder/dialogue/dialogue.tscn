@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://3d4o7tcp1rqy"]
 
-[ext_resource type="Script" path="res://addons/dialogue/dialogue.gd" id="1_8ppx3"]
+[ext_resource type="Script" path="res://bliss_coder/dialogue/dialogue.gd" id="1_8ppx3"]
 [ext_resource type="Theme" uid="uid://bkbeh7sgw1fur" path="res://themes/default_theme.tres" id="2_gikqy"]
 
 [sub_resource type="Animation" id="Animation_wlvvq"]

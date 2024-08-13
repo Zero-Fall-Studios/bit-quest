@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7x3udkbl8yvm"]
 
-[ext_resource type="Script" path="res://addons/inventory/ui/draggable/draggable_item.gd" id="1_3miwi"]
+[ext_resource type="Script" path="res://bliss_coder/inventory/ui/draggable/draggable_item.gd" id="1_3miwi"]
 [ext_resource type="Texture2D" uid="uid://cyubp5bn3ohhx" path="res://assets/images/InventorySlot.png" id="2_7jton"]
-[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://addons/inventory/examples/inventory.tres" id="2_mmeag"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://bliss_coder/inventory/examples/inventory.tres" id="2_mmeag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5htf5"]
 size = Vector2(16, 16)

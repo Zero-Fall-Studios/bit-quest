@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cink5p3q0ct6a" path="res://addons/lights/assets/light.png" id="3_57nkv"]
 [ext_resource type="Theme" uid="uid://bkbeh7sgw1fur" path="res://themes/default_theme.tres" id="5_enyd2"]
 [ext_resource type="PackedScene" uid="uid://bacc0kqeepab1" path="res://addons/pickup/pickup.tscn" id="7_lswnv"]
-[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://addons/inventory/examples/item_atlases/money.tres" id="8_it14n"]
-[ext_resource type="PackedScene" uid="uid://b1wkt4sx0qqp0" path="res://addons/inventory/ui/inventory_ui.tscn" id="9_1v10c"]
+[ext_resource type="Resource" uid="uid://cvk2ffuc3j1e1" path="res://bliss_coder/inventory/examples/item_atlases/money.tres" id="8_it14n"]
+[ext_resource type="PackedScene" uid="uid://b1wkt4sx0qqp0" path="res://bliss_coder/inventory/ui/inventory_ui.tscn" id="9_1v10c"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2wiwg"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

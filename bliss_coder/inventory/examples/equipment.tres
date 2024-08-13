@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://cfc4rj3eghbjo"]
 
-[ext_resource type="Script" path="res://addons/inventory/equipment.gd" id="1_wxe1x"]
+[ext_resource type="Script" path="res://bliss_coder/inventory/equipment.gd" id="1_wxe1x"]
 
 [resource]
 script = ExtResource("1_wxe1x")

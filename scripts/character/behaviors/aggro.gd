@@ -12,7 +12,7 @@ class_name Aggro extends Node
 @export var audio_on_deaggro: AudioStreamPlayer2D
 
 @export_group("Aggro Conditions")
-@export var alignment: CharacterSheet.CharacterAlignment = CharacterSheet.CharacterAlignment.Neutral
+@export var heat: int = 1
 
 var parent: Character
 
@@ -25,7 +25,7 @@ func _ready():
 	target_in_range.out_of_range.connect(_on_out_of_range)
 
 func _on_in_range(target):
-	if target.character_sheet.alignment != alignment:
+	if target.character_sheet.get_heat() < heat:
 		return
 
 	if not parent.aggro:

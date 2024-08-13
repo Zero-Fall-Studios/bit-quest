@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://3bg68s454lxs"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_j1to8"]
-[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://addons/inventory/examples/inventory.tres" id="2_0pner"]
+[ext_resource type="Resource" uid="uid://5ty56lylab6q" path="res://bliss_coder/inventory/examples/inventory.tres" id="2_0pner"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="2_rspcn"]
 [ext_resource type="PackedScene" uid="uid://b6slnj6s2yum6" path="res://scenes/environment/block.tscn" id="3_manry"]
 [ext_resource type="PackedScene" uid="uid://ein1ed3f8t70" path="res://scenes/characters/wandering_npc.tscn" id="5_d2j55"]
@@ -15,7 +15,7 @@
 script = ExtResource("6_jotgj")
 race = 3
 class_type = 4
-alignment = 1
+alignment = 0.0
 level = 1
 hp = 1
 mp = 1
@@ -43,7 +43,7 @@ start_attack = 1
 script = ExtResource("6_jotgj")
 race = 3
 class_type = 4
-alignment = 1
+alignment = 0.0
 level = 1
 hp = 1
 mp = 1

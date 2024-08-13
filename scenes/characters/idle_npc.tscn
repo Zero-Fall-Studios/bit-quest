@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_wjhif"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_in5ys"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_5jwas"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="5_0ptf6"]
+[ext_resource type="Script" path="res://bliss_coder/state_machine/state_machine.gd" id="5_0ptf6"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_idvil"]
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_xsp0f"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_u6qie"]
@@ -17,14 +17,14 @@
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_show.gd" id="13_cd6ai"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="14_8q42t"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/wait_for_interaction.gd" id="15_d2yu7"]
-[ext_resource type="Script" path="res://addons/dialogue/dialogue_script_action.gd" id="16_8jppy"]
+[ext_resource type="Script" path="res://bliss_coder/dialogue/dialogue_script_action.gd" id="16_8jppy"]
 [ext_resource type="Script" path="res://scripts/beehave/leaf/action/interaction_ui_hide.gd" id="16_bgii4"]
 
 [sub_resource type="Resource" id="Resource_rfns4"]
 script = ExtResource("2_wjhif")
 race = 3
 class_type = 4
-alignment = 1
+alignment = 0.0
 level = 1
 hp = 1
 mp = 1
@@ -89,6 +89,7 @@ _data = {
 }
 
 [node name="IdleNpc" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_gvyob")
 character_sheet = SubResource("Resource_rfns4")
 
@@ -128,7 +129,7 @@ script = ExtResource("9_ginu2")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_nrocr")
-blackboard = NodePath("@Node@17290")
+blackboard = NodePath("@Node@17288")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
@@ -150,7 +151,7 @@ script = ExtResource("15_d2yu7")
 
 [node name="DialogueScriptAction" type="Node" parent="BeehaveTree/SelectorComposite/Talking"]
 script = ExtResource("16_8jppy")
-dialogue_script_path = "res://addons/dialogue/dialogue_interaction.dsf"
+dialogue_script_path = "res://bliss_coder/dialogue/dialogue_interaction.dsf"
 
 [node name="Idle" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("11_odkn4")

@@ -2,12 +2,11 @@ class_name CharacterSheet extends Resource
 
 enum CharacterRace {Dwarf, Elf, Halfling, Human, Dragonborn, Gnome, HalfElf, HalfOrc}
 enum CharacterClassType {Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard}
-enum CharacterAlignment {Good, Neutral, Evil}
 
 @export_group("Character Type")
 @export var race: CharacterRace = CharacterRace.Human
 @export var class_type: CharacterClassType = CharacterClassType.Fighter
-@export var alignment: CharacterAlignment = CharacterAlignment.Neutral
+@export_range(-1.0, 1.0) var alignment: float = 0.0
 
 @export_group("Character Stats")
 @export var level: int = 1
@@ -35,15 +34,58 @@ enum CharacterAlignment {Good, Neutral, Evil}
 @export var start_charisma: int = 1
 @export var start_attack: int = 1
 
+signal on_alignment_change(alignment: float)
+
 func reset():
-  level = start_level
-  hp = start_hp
-  mp = start_mp
-  xp = start_xp
-  strength = start_strength
-  dexterity = start_dexterity
-  constitution = start_constitution
-  intelligence = start_intelligence
-  wisdom = start_wisdom
-  charisma = start_charisma
-  attack = start_attack
+	level = start_level
+	hp = start_hp
+	mp = start_mp
+	xp = start_xp
+	strength = start_strength
+	dexterity = start_dexterity
+	constitution = start_constitution
+	intelligence = start_intelligence
+	wisdom = start_wisdom
+	charisma = start_charisma
+	attack = start_attack
+
+func set_alignment(value: float):
+	alignment = clamp(value, -1.0, 1.0)
+	on_alignment_change.emit(alignment)
+
+func change_alignment(value: float):
+	set_alignment(alignment + value)
+
+func is_good():
+	return alignment > 0.3
+
+func is_evil():
+	return alignment < - 0.3
+
+func is_neutral():
+	return alignment >= - 0.3 and alignment <= 0.3
+
+func get_heat_stars():
+	if alignment >= 0:
+		return ""
+	elif alignment >= - 0.25:
+		return "*"
+	elif alignment >= - 0.5:
+		return "**"
+	elif alignment >= - 0.75:
+		return "***"
+	elif alignment >= - 1:
+		return "****"
+
+func get_heat() -> int:
+	if alignment >= 0:
+		return 0
+	elif alignment >= - 0.25:
+		return 1
+	elif alignment >= - 0.5:
+		return 2
+	elif alignment >= - 0.75:
+		return 3
+	elif alignment >= - 1:
+		return 4
+	return 0

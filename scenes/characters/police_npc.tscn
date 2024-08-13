@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_cx8np"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_v4avw"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_sqya2"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="5_3q3pq"]
+[ext_resource type="Script" path="res://bliss_coder/state_machine/state_machine.gd" id="5_fkhhh"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="6_uba3b"]
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="7_o2swr"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="8_3ryi8"]
@@ -25,7 +25,7 @@
 script = ExtResource("2_cx8np")
 race = 3
 class_type = 4
-alignment = 1
+alignment = 0.0
 level = 1
 hp = 1
 mp = 1
@@ -157,6 +157,7 @@ _data = {
 }
 
 [node name="PoliceNPC" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_ik32e")
 character_sheet = SubResource("Resource_tvth3")
 
@@ -176,7 +177,7 @@ libraries = {
 script = ExtResource("4_sqya2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_3q3pq")
+script = ExtResource("5_fkhhh")
 initial_state = NodePath("SpawnState")
 
 [node name="SpawnState" type="Node" parent="StateMachine" node_paths=PackedStringArray("next_state")]
@@ -196,7 +197,7 @@ target_in_range = NodePath("../TargetInRange")
 animation_on_aggro = "Enrage"
 animation_on_deaggro = "Derage"
 audio_on_aggro = NodePath("../EnrageAudio")
-alignment = 2
+heat = 2
 
 [node name="TargetInRange" type="Node" parent="."]
 script = ExtResource("9_tp0ec")
@@ -210,7 +211,7 @@ stream = ExtResource("12_umcar")
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("10_0xu24")
-blackboard = NodePath("@Node@17292")
+blackboard = NodePath("@Node@17290")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]

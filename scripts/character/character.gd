@@ -17,6 +17,9 @@ class_name Character extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var target_in_range: TargetInRange = $TargetInRange
 
+@export_group("Items")
+@export var inventory: Inventory
+
 signal on_spawn(c: Character, pos)
 signal on_die(c: Character, pos)
 
@@ -32,13 +35,6 @@ func _ready():
 	is_paralyzed = true
 	if state_machine:
 		state_machine.init(self)
-
-	DialogueScript.action_completed.connect(_on_action_completed)
-
-func _on_action_completed(_choice_index, action_name):
-	if action_name == "alignment_evil":
-		character_sheet.alignment = CharacterSheet.CharacterAlignment.Evil
-		return
 
 func _unhandled_input(event):
 	if is_paralyzed:

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c37f3qdvli5sr"]
+
+[ext_resource type="Script" path="res://scenes/ui/alignment.gd" id="1_8rnyl"]
+
+[node name="Alignment" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_8rnyl")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 0, 0, 1)
+offset_right = 40.0
+offset_bottom = 16.0
+scale = Vector2(0.5, 0.5)
+text = "XXXX"

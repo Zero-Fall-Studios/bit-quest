@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/character/character_sheet.gd" id="2_d4dhu"]
 [ext_resource type="Texture2D" uid="uid://ryaeo27p0gvi" path="res://assets/images/square.png" id="3_u0l2n"]
 [ext_resource type="Script" path="res://scripts/character/controls/npc_controls.gd" id="4_74quo"]
-[ext_resource type="Script" path="res://addons/state_machine/state_machine.gd" id="4_gnc0v"]
+[ext_resource type="Script" path="res://bliss_coder/state_machine/state_machine.gd" id="4_gnc0v"]
 [ext_resource type="Script" path="res://scripts/character/player/states/spawn_state.gd" id="5_51fdr"]
 [ext_resource type="Script" path="res://scripts/character/player/states/alive_state.gd" id="6_wv7rl"]
 [ext_resource type="Script" path="res://scripts/character/player/states/die_state.gd" id="7_dp3kx"]
